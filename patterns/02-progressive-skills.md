@@ -11,28 +11,33 @@ Agent Skills are filesystem-based resources that provide Claude with workflows, 
 ## Progressive Disclosure Architecture
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#8b5cf6', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#7c3aed', 'lineColor': '#a78bfa'}}}%%
 flowchart TB
-    subgraph Level1["Level 1: Metadata<br/>~100 tokens/skill"]
+    subgraph Level1["📦 Level 1: Metadata ~100 tokens/skill"]
         M1[name: pdf-processing]
         M2[description: Extract text...]
         M3[Always loaded at startup]
     end
 
-    subgraph Level2["Level 2: Instructions<br/>< 5k tokens"]
+    subgraph Level2["📚 Level 2: Instructions < 5k tokens"]
         I1[SKILL.md body]
         I2[Workflows & examples]
         I3[Loaded when triggered]
     end
 
-    subgraph Level3["Level 3: Resources<br/>Unlimited"]
+    subgraph Level3["🗄️ Level 3: Resources Unlimited"]
         R1[Scripts: fill_form.py]
         R2[Templates: schema.json]
         R3[References: API docs]
         R4[Loaded as needed via bash]
     end
 
-    Level1 -->|Skill triggered| Level2
-    Level2 -->|Reference found| Level3
+    Level1 -->|⚡ Skill triggered| Level2
+    Level2 -->|🔗 Reference found| Level3
+
+    style Level1 fill:#10b981,stroke:#059669,stroke-width:2px,color:#ffffff
+    style Level2 fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#ffffff
+    style Level3 fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#ffffff
 ```
 
 ## Three Levels of Loading
@@ -46,22 +51,26 @@ flowchart TB
 ## Skill Structure
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#6366f1', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#4f46e5', 'lineColor': '#a78bfa'}}}%%
 graph TD
-    subgraph SkillDir["pdf-skill/"]
-        SM[SKILL.md<br/>Main instructions]
-        FM[FORMS.md<br/>Form-filling guide]
-        RM[REFERENCE.md<br/>API reference]
+    subgraph SkillDir["📁 pdf-skill/"]
+        SM[📄 SKILL.md<br/>Main instructions]
+        FM[📋 FORMS.md<br/>Form-filling guide]
+        RM[📖 REFERENCE.md<br/>API reference]
 
-        subgraph Scripts["scripts/"]
+        subgraph Scripts["⚙️ scripts/"]
             S1[fill_form.py]
             S2[validate.py]
             S3[extract.py]
         end
     end
 
-    SM -->|Links to| FM
-    SM -->|Links to| RM
-    SM -->|Executes| Scripts
+    SM -->|🔗 Links to| FM
+    SM -->|🔗 Links to| RM
+    SM -->|▶️ Executes| Scripts
+
+    style SkillDir fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#ffffff
+    style Scripts fill:#ec4899,stroke:#db2777,stroke-width:2px,color:#ffffff
 ```
 
 ### Directory Layout
@@ -123,25 +132,26 @@ Run validation: `python scripts/validate.py input.csv`
 ## Loading Sequence
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#8b5cf6', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#7c3aed', 'lineColor': '#a78bfa', 'actorBkg': '#6366f1', 'actorTextColor': '#ffffff', 'actorBorder': '#4f46e5', 'signalColor': '#a78bfa', 'activationBkgColor': '#c4b5fd', 'activationBorderColor': '#7c3aed', 'noteBkgColor': '#fef3c7', 'noteTextColor': '#92400e', 'noteBorderColor': '#f59e0b'}}}%%
 sequenceDiagram
-    participant S as System Prompt
-    participant C as Claude
-    participant FS as Filesystem
-    participant CTX as Context Window
+    participant S as 🚀 System Prompt
+    participant C as 🧠 Claude
+    participant FS as 📁 Filesystem
+    participant CTX as 🪟 Context Window
 
-    Note over S,CTX: Startup
+    Note over S,CTX: 🟢 Startup
     S->>CTX: Load skill metadata (~100 tokens)
 
-    Note over S,CTX: User Request: "Process this PDF"
+    Note over S,CTX: 📥 User Request: "Process this PDF"
     C->>C: Match request to skill description
     C->>FS: bash: cat pdf-skill/SKILL.md
     FS-->>CTX: Instructions loaded (~2k tokens)
 
-    Note over S,CTX: Need Form Details
+    Note over S,CTX: 📋 Need Form Details
     C->>FS: bash: cat pdf-skill/FORMS.md
     FS-->>CTX: Form guide loaded
 
-    Note over S,CTX: Execute Script
+    Note over S,CTX: ⚡ Execute Script
     C->>FS: bash: python scripts/fill_form.py
     FS-->>CTX: Script OUTPUT only (not code)
 ```
@@ -229,17 +239,18 @@ echo "print('Hello')" > .claude/skills/my-skill/scripts/helper.py
 ### Skill Design Principles
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#8b5cf6', 'primaryTextColor': '#ffffff'}}}%%
 mindmap
-  root((Skill Design))
-    Focused
+  root((🎯 Skill Design))
+    🔍 Focused
       Single responsibility
       Clear boundaries
       Composable with others
-    Progressive
+    📊 Progressive
       Light metadata
       Core instructions
       Deep resources
-    Actionable
+    ⚡ Actionable
       Concrete examples
       Ready-to-run scripts
       Clear workflows

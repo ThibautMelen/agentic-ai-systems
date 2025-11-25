@@ -46,6 +46,7 @@ Building effective AI agents requires proven architectural patterns. This reposi
 ## Overview
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#6366f1', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#4f46e5', 'lineColor': '#8b5cf6', 'secondaryColor': '#ec4899', 'tertiaryColor': '#14b8a6', 'background': '#1e1b4b', 'mainBkg': '#312e81', 'nodeBorder': '#818cf8', 'clusterBkg': '#1e1b4b', 'titleColor': '#f8fafc', 'edgeLabelBackground': '#1e1b4b'}}}%%
 mindmap
   root((Claude Agentic Patterns))
     Orchestration
@@ -81,30 +82,42 @@ mindmap
 ### Pattern Selection Guide
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#8b5cf6', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#7c3aed', 'lineColor': '#a78bfa', 'secondaryColor': '#f472b6', 'tertiaryColor': '#2dd4bf', 'background': '#0f172a', 'mainBkg': '#1e1b4b', 'nodeBorder': '#a78bfa', 'clusterBkg': '#1e1b4b', 'titleColor': '#f8fafc', 'edgeLabelBackground': '#1e1b4b'}}}%%
 flowchart TD
-    Start[Task Type?] --> Q1{Need specialized<br/>expertise?}
+    Start([🎯 Task Type?]):::startNode --> Q1{🧠 Need specialized<br/>expertise?}:::questionNode
 
-    Q1 -->|Yes| Q2{Fixed or<br/>dynamic?}
-    Q1 -->|No| Q3{Multiple<br/>operations?}
+    Q1 -->|Yes| Q2{📋 Fixed or<br/>dynamic?}:::questionNode
+    Q1 -->|No| Q3{⚡ Multiple<br/>operations?}:::questionNode
 
-    Q2 -->|Fixed workflows| P1[01: Subagent Orchestration]
-    Q2 -->|Dynamic needs| P4[04: Master-Clone]
+    Q2 -->|Fixed workflows| P1[🤖 01: Subagent Orchestration]:::patternNode1
+    Q2 -->|Dynamic needs| P4[🧬 04: Master-Clone]:::patternNode4
 
-    Q3 -->|Yes, independent| P3[03: Parallel Tool Calling]
-    Q3 -->|Yes, dependent| Q4{Complex logic?}
-    Q3 -->|No| Direct[Direct execution]
+    Q3 -->|Yes, independent| P3[⚡ 03: Parallel Tool Calling]:::patternNode3
+    Q3 -->|Yes, dependent| Q4{🔧 Complex logic?}:::questionNode
+    Q3 -->|No| Direct[✅ Direct execution]:::directNode
 
-    Q4 -->|Yes| P6[06: Programmatic Orchestration]
-    Q4 -->|No| Sequential[Sequential calls]
+    Q4 -->|Yes| P6[💻 06: Programmatic Orchestration]:::patternNode6
+    Q4 -->|No| Sequential[📝 Sequential calls]:::directNode
 
-    Start --> Q5{Long-running<br/>task?}
-    Q5 -->|Yes| P5[05: Multi-Window Context]
+    Start --> Q5{⏰ Long-running<br/>task?}:::questionNode
+    Q5 -->|Yes| P5[🪟 05: Multi-Window Context]:::patternNode5
 
-    Start --> Q6{User approval<br/>needed?}
-    Q6 -->|Yes| P7[07: Wizard Workflows]
+    Start --> Q6{👤 User approval<br/>needed?}:::questionNode
+    Q6 -->|Yes| P7[🧙 07: Wizard Workflows]:::patternNode7
 
-    Start --> Q7{Modular<br/>capabilities?}
-    Q7 -->|Yes| P2[02: Progressive Skills]
+    Start --> Q7{📦 Modular<br/>capabilities?}:::questionNode
+    Q7 -->|Yes| P2[🎯 02: Progressive Skills]:::patternNode2
+
+    classDef startNode fill:#6366f1,stroke:#4f46e5,stroke-width:3px,color:#ffffff
+    classDef questionNode fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#ffffff
+    classDef patternNode1 fill:#ec4899,stroke:#db2777,stroke-width:2px,color:#ffffff
+    classDef patternNode2 fill:#14b8a6,stroke:#0d9488,stroke-width:2px,color:#ffffff
+    classDef patternNode3 fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#ffffff
+    classDef patternNode4 fill:#ef4444,stroke:#dc2626,stroke-width:2px,color:#ffffff
+    classDef patternNode5 fill:#3b82f6,stroke:#2563eb,stroke-width:2px,color:#ffffff
+    classDef patternNode6 fill:#10b981,stroke:#059669,stroke-width:2px,color:#ffffff
+    classDef patternNode7 fill:#f472b6,stroke:#ec4899,stroke-width:2px,color:#ffffff
+    classDef directNode fill:#64748b,stroke:#475569,stroke-width:2px,color:#ffffff
 ```
 
 ### By Use Case
@@ -127,31 +140,32 @@ flowchart TD
 ### High-Level Overview
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#6366f1', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#4f46e5', 'lineColor': '#a78bfa', 'secondaryColor': '#ec4899', 'tertiaryColor': '#14b8a6', 'background': '#0f172a', 'mainBkg': '#1e1b4b', 'nodeBorder': '#818cf8', 'clusterBkg': '#312e81', 'clusterBorder': '#6366f1', 'titleColor': '#f8fafc', 'edgeLabelBackground': '#1e1b4b'}}}%%
 flowchart TB
-    subgraph User["User Layer"]
-        U[User Request]
+    subgraph User["👤 User Layer"]
+        U[🎯 User Request]:::userNode
     end
 
-    subgraph Agent["Main Agent Layer"]
-        MA[Claude Main Agent]
-        TD[Task Decomposition]
+    subgraph Agent["🤖 Main Agent Layer"]
+        MA[🧠 Claude Main Agent]:::agentNode
+        TD[📋 Task Decomposition]:::agentNode
     end
 
-    subgraph Delegation["Delegation Layer"]
-        SA[Subagents]
-        SK[Skills]
-        CL[Clones]
+    subgraph Delegation["🔀 Delegation Layer"]
+        SA[🤖 Subagents]:::delegateNode1
+        SK[🎯 Skills]:::delegateNode2
+        CL[🧬 Clones]:::delegateNode3
     end
 
-    subgraph Execution["Execution Layer"]
-        PT[Parallel Tools]
-        PO[Programmatic Scripts]
-        WZ[Wizard Steps]
+    subgraph Execution["⚡ Execution Layer"]
+        PT[⚡ Parallel Tools]:::execNode1
+        PO[💻 Programmatic Scripts]:::execNode2
+        WZ[🧙 Wizard Steps]:::execNode3
     end
 
-    subgraph State["State Layer"]
-        CTX[Context Management]
-        MEM[Memory/Persistence]
+    subgraph State["💾 State Layer"]
+        CTX[📊 Context Management]:::stateNode
+        MEM[🗄️ Memory/Persistence]:::stateNode
     end
 
     U --> MA
@@ -160,23 +174,34 @@ flowchart TB
     SA & SK & CL --> PT & PO & WZ
     PT & PO & WZ --> CTX
     CTX <--> MEM
+
+    classDef userNode fill:#6366f1,stroke:#4f46e5,stroke-width:2px,color:#ffffff
+    classDef agentNode fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#ffffff
+    classDef delegateNode1 fill:#ec4899,stroke:#db2777,stroke-width:2px,color:#ffffff
+    classDef delegateNode2 fill:#14b8a6,stroke:#0d9488,stroke-width:2px,color:#ffffff
+    classDef delegateNode3 fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#ffffff
+    classDef execNode1 fill:#f472b6,stroke:#ec4899,stroke-width:2px,color:#ffffff
+    classDef execNode2 fill:#10b981,stroke:#059669,stroke-width:2px,color:#ffffff
+    classDef execNode3 fill:#3b82f6,stroke:#2563eb,stroke-width:2px,color:#ffffff
+    classDef stateNode fill:#64748b,stroke:#475569,stroke-width:2px,color:#ffffff
 ```
 
 ### Pattern Interactions
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#8b5cf6', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#7c3aed', 'lineColor': '#a78bfa', 'secondaryColor': '#f472b6', 'tertiaryColor': '#2dd4bf', 'background': '#0f172a', 'mainBkg': '#1e1b4b', 'nodeBorder': '#a78bfa', 'clusterBkg': '#312e81', 'clusterBorder': '#8b5cf6', 'titleColor': '#f8fafc', 'edgeLabelBackground': '#1e1b4b'}}}%%
 graph LR
-    subgraph Core["Core Patterns"]
-        P1[Subagents]
-        P2[Skills]
-        P3[Parallel Tools]
+    subgraph Core["🌟 Core Patterns"]
+        P1[🤖 Subagents]:::coreNode1
+        P2[🎯 Skills]:::coreNode2
+        P3[⚡ Parallel Tools]:::coreNode3
     end
 
-    subgraph Advanced["Advanced Patterns"]
-        P4[Master-Clone]
-        P5[Multi-Window]
-        P6[Programmatic]
-        P7[Wizard]
+    subgraph Advanced["🚀 Advanced Patterns"]
+        P4[🧬 Master-Clone]:::advNode1
+        P5[🪟 Multi-Window]:::advNode2
+        P6[💻 Programmatic]:::advNode3
+        P7[🧙 Wizard]:::advNode4
     end
 
     P1 --> P3
@@ -186,6 +211,14 @@ graph LR
     P6 --> P3
     P7 --> P1
     P7 --> P2
+
+    classDef coreNode1 fill:#ec4899,stroke:#db2777,stroke-width:2px,color:#ffffff
+    classDef coreNode2 fill:#14b8a6,stroke:#0d9488,stroke-width:2px,color:#ffffff
+    classDef coreNode3 fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#ffffff
+    classDef advNode1 fill:#ef4444,stroke:#dc2626,stroke-width:2px,color:#ffffff
+    classDef advNode2 fill:#3b82f6,stroke:#2563eb,stroke-width:2px,color:#ffffff
+    classDef advNode3 fill:#10b981,stroke:#059669,stroke-width:2px,color:#ffffff
+    classDef advNode4 fill:#f472b6,stroke:#ec4899,stroke-width:2px,color:#ffffff
 ```
 
 ### Pattern Synergies
@@ -206,10 +239,16 @@ graph LR
 Each subagent operates in its own context window, preventing pollution and enabling focused task execution.
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#6366f1', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#4f46e5', 'lineColor': '#a78bfa', 'secondaryColor': '#ec4899', 'tertiaryColor': '#14b8a6'}}}%%
 flowchart LR
-    Main[Main Agent<br/>200k tokens] --> S1[Subagent 1<br/>Fresh context]
-    Main --> S2[Subagent 2<br/>Fresh context]
-    Main --> S3[Subagent 3<br/>Fresh context]
+    Main[🧠 Main Agent<br/>200k tokens]:::mainNode --> S1[🤖 Subagent 1<br/>Fresh context]:::subNode1
+    Main --> S2[🤖 Subagent 2<br/>Fresh context]:::subNode2
+    Main --> S3[🤖 Subagent 3<br/>Fresh context]:::subNode3
+
+    classDef mainNode fill:#6366f1,stroke:#4f46e5,stroke-width:3px,color:#ffffff
+    classDef subNode1 fill:#ec4899,stroke:#db2777,stroke-width:2px,color:#ffffff
+    classDef subNode2 fill:#14b8a6,stroke:#0d9488,stroke-width:2px,color:#ffffff
+    classDef subNode3 fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#ffffff
 ```
 
 ### Progressive Disclosure
@@ -227,20 +266,21 @@ Skills load information in stages to optimize token usage:
 Claude 4.x models aggressively parallelize independent operations for optimal performance.
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#6366f1', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#4f46e5', 'lineColor': '#a78bfa', 'secondaryColor': '#10b981', 'tertiaryColor': '#f59e0b'}}}%%
 gantt
     title Sequential vs Parallel Execution
     dateFormat X
     axisFormat %s
 
-    section Sequential
-    Tool 1    :0, 3
-    Tool 2    :3, 6
-    Tool 3    :6, 9
+    section Sequential ❌
+    Tool 1    :crit, 0, 3
+    Tool 2    :crit, 3, 6
+    Tool 3    :crit, 6, 9
 
-    section Parallel
-    Tool 1    :0, 3
-    Tool 2    :0, 3
-    Tool 3    :0, 3
+    section Parallel ✅
+    Tool 1    :active, 0, 3
+    Tool 2    :active, 0, 3
+    Tool 3    :active, 0, 3
 ```
 
 ### State Persistence

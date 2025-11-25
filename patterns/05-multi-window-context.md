@@ -11,34 +11,40 @@ Claude 4.5 models excel at long-horizon reasoning with exceptional state trackin
 ## Architecture
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#8b5cf6', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#7c3aed', 'lineColor': '#a78bfa'}}}%%
 flowchart TB
-    subgraph Window1["Context Window 1"]
-        W1A[Setup Framework]
-        W1B[Write Tests]
-        W1C[Create init.sh]
-        W1D[Save to tests.json]
+    subgraph Window1["🪟 Context Window 1"]
+        W1A[🔧 Setup Framework]
+        W1B[🧪 Write Tests]
+        W1C[📜 Create init.sh]
+        W1D[💾 Save to tests.json]
     end
 
-    subgraph Window2["Context Window 2"]
-        W2A[Read tests.json]
-        W2B[Implement features]
-        W2C[Update progress.txt]
+    subgraph Window2["🪟 Context Window 2"]
+        W2A[📖 Read tests.json]
+        W2B[⚡ Implement features]
+        W2C[📝 Update progress.txt]
     end
 
-    subgraph Window3["Context Window N"]
-        W3A[Read progress.txt]
-        W3B[Continue implementation]
-        W3C[Run verification]
+    subgraph Window3["🪟 Context Window N"]
+        W3A[📖 Read progress.txt]
+        W3B[🔄 Continue implementation]
+        W3C[✅ Run verification]
     end
 
-    Window1 -->|State persisted| Window2
-    Window2 -->|State persisted| Window3
+    Window1 -->|💾 State persisted| Window2
+    Window2 -->|💾 State persisted| Window3
 
-    subgraph StateFiles["State Files"]
+    subgraph StateFiles["🗄️ State Files"]
         SF1[tests.json - Structured]
         SF2[progress.txt - Freeform]
         SF3[Git commits - Checkpoints]
     end
+
+    style Window1 fill:#6366f1,stroke:#4f46e5,stroke-width:2px,color:#ffffff
+    style Window2 fill:#ec4899,stroke:#db2777,stroke-width:2px,color:#ffffff
+    style Window3 fill:#10b981,stroke:#059669,stroke-width:2px,color:#ffffff
+    style StateFiles fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#ffffff
 ```
 
 ## Context Awareness
@@ -108,21 +114,22 @@ git diff HEAD~1
 ## Multi-Window Workflow
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#8b5cf6', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#7c3aed', 'lineColor': '#a78bfa', 'actorBkg': '#6366f1', 'actorTextColor': '#ffffff', 'actorBorder': '#4f46e5', 'signalColor': '#a78bfa', 'activationBkgColor': '#c4b5fd', 'activationBorderColor': '#7c3aed', 'noteBkgColor': '#fef3c7', 'noteTextColor': '#92400e', 'noteBorderColor': '#f59e0b'}}}%%
 sequenceDiagram
-    participant U as User
-    participant C1 as Context 1
-    participant FS as Filesystem
-    participant C2 as Context 2
+    participant U as 👤 User
+    participant C1 as 🪟 Context 1
+    participant FS as 📁 Filesystem
+    participant C2 as 🪟 Context 2
 
-    Note over C1: First Window
+    Note over C1: 🟢 First Window
     U->>C1: Start complex task
     C1->>C1: Setup framework, write tests
     C1->>FS: Save tests.json, progress.txt
     C1->>FS: git commit checkpoint
 
-    Note over C1,C2: Context Compaction/Refresh
+    Note over C1,C2: 🔄 Context Compaction/Refresh
 
-    Note over C2: Fresh Window
+    Note over C2: ✨ Fresh Window
     C2->>FS: Read tests.json, progress.txt
     C2->>FS: git log, git diff
     C2->>C2: Restore context from files
@@ -175,16 +182,19 @@ Files are your memory. Save early, save often.
 ### First Window Strategy
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#8b5cf6', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#7c3aed', 'lineColor': '#a78bfa'}}}%%
 flowchart LR
-    subgraph First["First Context Window"]
-        F1[Understand requirements]
-        F2[Create test framework]
-        F3[Write initial tests]
-        F4[Create init.sh script]
-        F5[Setup state files]
+    subgraph First["🟢 First Context Window"]
+        F1[📋 Understand requirements]
+        F2[🔧 Create test framework]
+        F3[🧪 Write initial tests]
+        F4[📜 Create init.sh script]
+        F5[💾 Setup state files]
     end
 
     F1 --> F2 --> F3 --> F4 --> F5
+
+    style First fill:#6366f1,stroke:#4f46e5,stroke-width:2px,color:#ffffff
 ```
 
 Focus on:
@@ -195,16 +205,19 @@ Focus on:
 ### Subsequent Windows Strategy
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#8b5cf6', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#7c3aed', 'lineColor': '#a78bfa'}}}%%
 flowchart LR
-    subgraph Subsequent["Subsequent Context Windows"]
-        S1[Read state files]
-        S2[Review git history]
-        S3[Run verification]
-        S4[Continue from todo list]
-        S5[Update state]
+    subgraph Subsequent["🔄 Subsequent Context Windows"]
+        S1[📖 Read state files]
+        S2[📜 Review git history]
+        S3[✅ Run verification]
+        S4[📋 Continue from todo list]
+        S5[💾 Update state]
     end
 
     S1 --> S2 --> S3 --> S4 --> S5
+
+    style Subsequent fill:#10b981,stroke:#059669,stroke-width:2px,color:#ffffff
 ```
 
 Focus on:
@@ -323,11 +336,17 @@ npm test -- --testPathPattern="smoke" --silent
 Claude's [Memory Tool](https://docs.anthropic.com/docs/en/agents-and-tools/tool-use/memory-tool) pairs naturally with context awareness for seamless transitions:
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#8b5cf6', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#7c3aed', 'lineColor': '#a78bfa'}}}%%
 flowchart LR
-    CA[Context Awareness] --> MT[Memory Tool]
-    MT --> SP[State Persistence]
-    SP --> CR[Context Restoration]
+    CA[🧠 Context Awareness]:::node1 --> MT[💾 Memory Tool]:::node2
+    MT --> SP[📁 State Persistence]:::node3
+    SP --> CR[🔄 Context Restoration]:::node4
     CR --> CA
+
+    classDef node1 fill:#6366f1,stroke:#4f46e5,stroke-width:2px,color:#ffffff
+    classDef node2 fill:#ec4899,stroke:#db2777,stroke-width:2px,color:#ffffff
+    classDef node3 fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#ffffff
+    classDef node4 fill:#10b981,stroke:#059669,stroke-width:2px,color:#ffffff
 ```
 
 ---

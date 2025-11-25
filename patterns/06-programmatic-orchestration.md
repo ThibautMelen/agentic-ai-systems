@@ -11,41 +11,46 @@ Instead of invoking tools sequentially with multiple model inference passes, Cla
 ## Traditional vs Programmatic
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#8b5cf6', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#7c3aed', 'lineColor': '#a78bfa'}}}%%
 flowchart LR
-    subgraph Traditional["Traditional (Multiple Inferences)"]
-        T1["Inference 1:<br/>Call tool 1"]
-        T2["Inference 2:<br/>Call tool 2"]
-        T3["Inference 3:<br/>Call tool 3"]
-        T4["Inference 4:<br/>Synthesize"]
+    subgraph Traditional["🐢 Traditional - Multiple Inferences"]
+        T1["🔄 Inference 1:<br/>Call tool 1"]
+        T2["🔄 Inference 2:<br/>Call tool 2"]
+        T3["🔄 Inference 3:<br/>Call tool 3"]
+        T4["🔄 Inference 4:<br/>Synthesize"]
         T1 --> T2 --> T3 --> T4
     end
 
-    subgraph Programmatic["Programmatic (Single Script)"]
-        P1[Write Python script]
-        P2[Script executes<br/>multiple tools]
-        P3[Return aggregated<br/>results]
+    subgraph Programmatic["🚀 Programmatic - Single Script"]
+        P1[📝 Write Python script]
+        P2[⚡ Script executes<br/>multiple tools]
+        P3[📊 Return aggregated<br/>results]
         P1 --> P2 --> P3
     end
+
+    style Traditional fill:#ef4444,stroke:#dc2626,stroke-width:2px,color:#ffffff
+    style Programmatic fill:#10b981,stroke:#059669,stroke-width:2px,color:#ffffff
 ```
 
 ## Benefits
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#8b5cf6', 'primaryTextColor': '#ffffff'}}}%%
 mindmap
-  root((Programmatic<br/>Orchestration))
-    Performance
+  root((🚀 Programmatic<br/>Orchestration))
+    ⚡ Performance
       Reduced inference passes
       Lower latency
       Better accuracy
-    Control
+    🎛️ Control
       Explicit loops
       Conditionals
       Error handling
-    Reliability
+    🛡️ Reliability
       Deterministic execution
       No reasoning drift
       Predictable behavior
-    Efficiency
+    📈 Efficiency
       Batch operations
       Parallel execution
       Resource optimization

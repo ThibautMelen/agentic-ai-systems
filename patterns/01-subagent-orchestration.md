@@ -11,12 +11,13 @@ Subagents are pre-configured AI agents that Claude can delegate tasks to. Each s
 ## Architecture
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#8b5cf6', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#7c3aed', 'lineColor': '#a78bfa', 'secondaryColor': '#f472b6', 'tertiaryColor': '#2dd4bf', 'actorBkg': '#6366f1', 'actorTextColor': '#ffffff', 'actorBorder': '#4f46e5', 'signalColor': '#a78bfa', 'signalTextColor': '#1e1b4b', 'activationBkgColor': '#c4b5fd', 'activationBorderColor': '#7c3aed'}}}%%
 sequenceDiagram
-    participant U as User
-    participant M as Main Agent
-    participant E as Explore Agent
-    participant R as Code Reviewer
-    participant G as General Purpose
+    participant U as 👤 User
+    participant M as 🧠 Main Agent
+    participant E as 🔍 Explore Agent
+    participant R as 🛡️ Code Reviewer
+    participant G as ⚡ General Purpose
 
     U->>M: "Review auth module and find security issues"
 
@@ -49,27 +50,32 @@ sequenceDiagram
 ## Built-in Subagents
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#6366f1', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#4f46e5', 'lineColor': '#a78bfa', 'secondaryColor': '#ec4899', 'tertiaryColor': '#14b8a6'}}}%%
 graph LR
-    subgraph Explore["Explore Agent"]
+    subgraph Explore["🔍 Explore Agent"]
         E1[Model: Haiku]
         E2[Mode: Read-only]
         E3[Tools: Glob, Grep, Read]
         E4[Purpose: Fast codebase search]
     end
 
-    subgraph Plan["Plan Agent"]
+    subgraph Plan["📋 Plan Agent"]
         P1[Model: Sonnet]
         P2[Mode: Research]
         P3[Tools: Read, Glob, Grep, Bash]
         P4[Purpose: Planning mode research]
     end
 
-    subgraph General["General Purpose"]
+    subgraph General["⚡ General Purpose"]
         G1[Model: Sonnet]
         G2[Mode: Full Access]
         G3[Tools: All]
         G4[Purpose: Complex multi-step tasks]
     end
+
+    style Explore fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#ffffff
+    style Plan fill:#ec4899,stroke:#db2777,stroke-width:2px,color:#ffffff
+    style General fill:#14b8a6,stroke:#0d9488,stroke-width:2px,color:#ffffff
 ```
 
 ### Explore Agent
@@ -152,12 +158,20 @@ Organize findings by severity:
 Claude automatically delegates based on task description matching:
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#8b5cf6', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#7c3aed', 'lineColor': '#a78bfa'}}}%%
 flowchart LR
-    T[Task] --> A{Match description?}
-    A -->|Yes| S[Select subagent]
-    A -->|No| M[Main agent handles]
-    S --> E[Execute in isolation]
-    E --> R[Return results]
+    T[📥 Task]:::taskNode --> A{🔍 Match description?}:::decisionNode
+    A -->|Yes| S[✅ Select subagent]:::successNode
+    A -->|No| M[🧠 Main agent handles]:::mainNode
+    S --> E[⚡ Execute in isolation]:::executeNode
+    E --> R[📤 Return results]:::resultNode
+
+    classDef taskNode fill:#6366f1,stroke:#4f46e5,stroke-width:2px,color:#ffffff
+    classDef decisionNode fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#ffffff
+    classDef successNode fill:#10b981,stroke:#059669,stroke-width:2px,color:#ffffff
+    classDef mainNode fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#ffffff
+    classDef executeNode fill:#ec4899,stroke:#db2777,stroke-width:2px,color:#ffffff
+    classDef resultNode fill:#14b8a6,stroke:#0d9488,stroke-width:2px,color:#ffffff
 ```
 
 **Pro tip**: Include "use PROACTIVELY" or "MUST BE USED" in descriptions to encourage automatic invocation.
@@ -181,17 +195,18 @@ flowchart LR
 Subagents support resumption for multi-turn workflows:
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#8b5cf6', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#7c3aed', 'lineColor': '#a78bfa', 'actorBkg': '#6366f1', 'actorTextColor': '#ffffff', 'actorBorder': '#4f46e5', 'signalColor': '#a78bfa', 'activationBkgColor': '#c4b5fd', 'activationBorderColor': '#7c3aed', 'noteBkgColor': '#fef3c7', 'noteTextColor': '#92400e', 'noteBorderColor': '#f59e0b'}}}%%
 sequenceDiagram
-    participant U as User
-    participant M as Main Agent
-    participant S as Subagent
+    participant U as 👤 User
+    participant M as 🧠 Main Agent
+    participant S as ⚡ Subagent
 
     U->>M: "Analyze the auth module"
     M->>S: Initial analysis
     S-->>M: Results + agentId: "abc123"
     M->>U: Findings presented
 
-    Note over U,S: Later...
+    Note over U,S: ⏰ Later...
 
     U->>M: "Resume agent abc123 and check authorization too"
     M->>S: Resume with full context

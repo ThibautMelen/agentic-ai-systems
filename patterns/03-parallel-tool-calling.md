@@ -11,36 +11,48 @@ Claude 4.x models excel at parallel tool execution. When multiple operations hav
 ## Sequential vs Parallel
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#8b5cf6', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#7c3aed', 'lineColor': '#a78bfa'}}}%%
 flowchart LR
-    subgraph Sequential["Sequential (Slow)"]
-        S1[Read file1] --> S2[Read file2] --> S3[Read file3]
-        S4["~3 round trips<br/>~3x latency"]
+    subgraph Sequential["🐢 Sequential - Slow"]
+        S1[📄 Read file1] --> S2[📄 Read file2] --> S3[📄 Read file3]
+        S4["⏱️ ~3 round trips<br/>~3x latency"]
     end
 
-    subgraph Parallel["Parallel (Fast)"]
-        P1[Read file1]
-        P2[Read file2]
-        P3[Read file3]
-        P4["~1 round trip<br/>~1x latency"]
+    subgraph Parallel["🚀 Parallel - Fast"]
+        P1[📄 Read file1]
+        P2[📄 Read file2]
+        P3[📄 Read file3]
+        P4["⚡ ~1 round trip<br/>~1x latency"]
     end
 
     P1 & P2 & P3 --> P4
+
+    style Sequential fill:#ef4444,stroke:#dc2626,stroke-width:2px,color:#ffffff
+    style Parallel fill:#10b981,stroke:#059669,stroke-width:2px,color:#ffffff
 ```
 
 ## Decision Flow
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#8b5cf6', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#7c3aed', 'lineColor': '#a78bfa'}}}%%
 flowchart TD
-    Start[Multiple Tool Calls Needed] --> Check{Dependencies<br/>between calls?}
+    Start[🎯 Multiple Tool Calls Needed]:::startNode --> Check{🔍 Dependencies<br/>between calls?}:::decisionNode
 
-    Check -->|No dependencies| Parallel[Execute in Parallel]
-    Check -->|Has dependencies| Sequential[Execute Sequentially]
+    Check -->|No dependencies| Parallel[🚀 Execute in Parallel]:::parallelNode
+    Check -->|Has dependencies| Sequential[📋 Execute Sequentially]:::seqNode
 
-    Parallel --> PE["Example:<br/>Read 5 files simultaneously"]
-    Sequential --> SE["Example:<br/>mkdir && cp files"]
+    Parallel --> PE["✅ Example:<br/>Read 5 files simultaneously"]:::exampleNode
+    Sequential --> SE["✅ Example:<br/>mkdir && cp files"]:::exampleNode
 
-    PE --> Done[Aggregate Results]
+    PE --> Done[📊 Aggregate Results]:::resultNode
     SE --> Done
+
+    classDef startNode fill:#6366f1,stroke:#4f46e5,stroke-width:2px,color:#ffffff
+    classDef decisionNode fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#ffffff
+    classDef parallelNode fill:#10b981,stroke:#059669,stroke-width:2px,color:#ffffff
+    classDef seqNode fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#ffffff
+    classDef exampleNode fill:#ec4899,stroke:#db2777,stroke-width:2px,color:#ffffff
+    classDef resultNode fill:#14b8a6,stroke:#0d9488,stroke-width:2px,color:#ffffff
 ```
 
 ## When to Parallelize
@@ -105,40 +117,52 @@ to ensure stability. Only parallelize when explicitly beneficial.
 ### Research Task
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#8b5cf6', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#7c3aed', 'lineColor': '#a78bfa'}}}%%
 flowchart LR
-    subgraph Parallel["Parallel Execution"]
-        G1[Glob: find *.ts files]
-        G2[Grep: search 'auth']
-        G3[Read: package.json]
+    subgraph Parallel["🚀 Parallel Execution"]
+        G1[🔍 Glob: find *.ts files]
+        G2[🔎 Grep: search 'auth']
+        G3[📄 Read: package.json]
     end
 
-    Parallel --> Analyze[Analyze Results]
+    Parallel --> Analyze[📊 Analyze Results]
+
+    style Parallel fill:#10b981,stroke:#059669,stroke-width:2px,color:#ffffff
 ```
 
 ### Code Review
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#8b5cf6', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#7c3aed', 'lineColor': '#a78bfa'}}}%%
 flowchart LR
-    subgraph Parallel["Parallel Execution"]
-        D[git diff]
-        S[git status]
-        L[git log -5]
+    subgraph Parallel["🚀 Parallel Execution"]
+        D[📝 git diff]
+        S[📋 git status]
+        L[📜 git log -5]
     end
 
-    Parallel --> Review[Review Changes]
+    Parallel --> Review[🔍 Review Changes]
+
+    style Parallel fill:#ec4899,stroke:#db2777,stroke-width:2px,color:#ffffff
 ```
 
 ### Multi-File Edit
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#8b5cf6', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#7c3aed', 'lineColor': '#a78bfa'}}}%%
 flowchart TD
-    Read["Read all files (parallel)"]
-    Read --> R1[file1.ts]
-    Read --> R2[file2.ts]
-    Read --> R3[file3.ts]
+    Read["📖 Read all files (parallel)"]:::readNode
+    Read --> R1[📄 file1.ts]:::fileNode
+    Read --> R2[📄 file2.ts]:::fileNode
+    Read --> R3[📄 file3.ts]:::fileNode
 
-    R1 & R2 & R3 --> Analyze[Analyze patterns]
-    Analyze --> Edit["Edit files (can be parallel<br/>if changes are independent)"]
+    R1 & R2 & R3 --> Analyze[🔍 Analyze patterns]:::analyzeNode
+    Analyze --> Edit["✏️ Edit files (can be parallel<br/>if changes are independent)"]:::editNode
+
+    classDef readNode fill:#6366f1,stroke:#4f46e5,stroke-width:2px,color:#ffffff
+    classDef fileNode fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#ffffff
+    classDef analyzeNode fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#ffffff
+    classDef editNode fill:#10b981,stroke:#059669,stroke-width:2px,color:#ffffff
 ```
 
 ## Claude 4.x Behavior

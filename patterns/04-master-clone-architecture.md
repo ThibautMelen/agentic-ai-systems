@@ -11,20 +11,21 @@ Instead of rigid custom subagents with predefined delegation rules, the Master-C
 ## Architecture
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#8b5cf6', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#7c3aed', 'lineColor': '#a78bfa'}}}%%
 flowchart TB
-    subgraph Master["Master Agent"]
-        M1[Full CLAUDE.md context]
-        M2[Task Analysis]
-        M3[Clone Orchestration]
+    subgraph Master["👑 Master Agent"]
+        M1[📚 Full CLAUDE.md context]
+        M2[🔍 Task Analysis]
+        M3[🎛️ Clone Orchestration]
     end
 
-    subgraph Clones["Spawned Clones"]
-        C1["Clone 1<br/>Task: Research API"]
-        C2["Clone 2<br/>Task: Implement feature"]
-        C3["Clone 3<br/>Task: Write tests"]
+    subgraph Clones["🧬 Spawned Clones"]
+        C1["🔬 Clone 1<br/>Task: Research API"]
+        C2["⚡ Clone 2<br/>Task: Implement feature"]
+        C3["🧪 Clone 3<br/>Task: Write tests"]
     end
 
-    subgraph Features["Key Features"]
+    subgraph Features["✨ Key Features"]
         F1[Dynamic spawning via Task tool]
         F2[Full context inheritance]
         F3[No rigid workflow definition]
@@ -37,13 +38,18 @@ flowchart TB
     C1 & C2 & C3 -->|results| M3
 
     Features -.-> Master
+
+    style Master fill:#6366f1,stroke:#4f46e5,stroke-width:2px,color:#ffffff
+    style Clones fill:#ec4899,stroke:#db2777,stroke-width:2px,color:#ffffff
+    style Features fill:#10b981,stroke:#059669,stroke-width:2px,color:#ffffff
 ```
 
 ## Master-Clone vs Custom Subagents
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#8b5cf6', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#7c3aed', 'lineColor': '#a78bfa'}}}%%
 graph TB
-    subgraph Custom["Custom Subagents"]
+    subgraph Custom["📦 Custom Subagents"]
         CS1[Rigid delegation rules]
         CS2[Predefined workflows]
         CS3[Manual configuration per agent]
@@ -51,7 +57,7 @@ graph TB
         CS5[Requires upfront design]
     end
 
-    subgraph MasterClone["Master-Clone"]
+    subgraph MasterClone["👑 Master-Clone"]
         MC1[Dynamic task assignment]
         MC2[Context-aware delegation]
         MC3[Self-organizing behavior]
@@ -59,7 +65,10 @@ graph TB
         MC5[Adapts to any task]
     end
 
-    Custom -->|"Evolution"| MasterClone
+    Custom -->|"🚀 Evolution"| MasterClone
+
+    style Custom fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#ffffff
+    style MasterClone fill:#10b981,stroke:#059669,stroke-width:2px,color:#ffffff
 ```
 
 ### Comparison Table
@@ -94,12 +103,13 @@ graph TB
 ### Basic Pattern
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#8b5cf6', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#7c3aed', 'lineColor': '#a78bfa', 'actorBkg': '#6366f1', 'actorTextColor': '#ffffff', 'actorBorder': '#4f46e5', 'signalColor': '#a78bfa', 'activationBkgColor': '#c4b5fd', 'activationBorderColor': '#7c3aed'}}}%%
 sequenceDiagram
-    participant U as User
-    participant M as Master Agent
-    participant T as Task Tool
-    participant C1 as Clone 1
-    participant C2 as Clone 2
+    participant U as 👤 User
+    participant M as 👑 Master Agent
+    participant T as 🛠️ Task Tool
+    participant C1 as 🧬 Clone 1
+    participant C2 as 🧬 Clone 2
 
     U->>M: Complex request
     M->>M: Analyze and decompose
@@ -194,25 +204,32 @@ Each spawned clone receives this full context, enabling informed decisions witho
 ### Hierarchical Clones
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#8b5cf6', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#7c3aed', 'lineColor': '#a78bfa'}}}%%
 flowchart TB
-    M[Master] --> C1[Clone: Coordinator]
-    C1 --> C1A[Sub-clone: Research]
-    C1 --> C1B[Sub-clone: Implement]
-    M --> C2[Clone: Validator]
+    M[👑 Master]:::masterNode --> C1[🎛️ Clone: Coordinator]:::coordNode
+    C1 --> C1A[🔬 Sub-clone: Research]:::subNode
+    C1 --> C1B[⚡ Sub-clone: Implement]:::subNode
+    M --> C2[✅ Clone: Validator]:::validatorNode
+
+    classDef masterNode fill:#6366f1,stroke:#4f46e5,stroke-width:3px,color:#ffffff
+    classDef coordNode fill:#ec4899,stroke:#db2777,stroke-width:2px,color:#ffffff
+    classDef subNode fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#ffffff
+    classDef validatorNode fill:#10b981,stroke:#059669,stroke-width:2px,color:#ffffff
 ```
 
 ### Iterative Refinement
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#8b5cf6', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#7c3aed', 'lineColor': '#a78bfa'}}}%%
 stateDiagram-v2
-    [*] --> Master
-    Master --> Clone1: Spawn for draft
-    Clone1 --> Master: Return draft
-    Master --> Clone2: Spawn for review
-    Clone2 --> Master: Return feedback
-    Master --> Clone3: Spawn for refinement
-    Clone3 --> Master: Return final
-    Master --> [*]
+    [*] --> Master: 🚀 Start
+    Master --> Clone1: 📝 Spawn for draft
+    Clone1 --> Master: ✅ Return draft
+    Master --> Clone2: 🔍 Spawn for review
+    Clone2 --> Master: 💬 Return feedback
+    Master --> Clone3: ✨ Spawn for refinement
+    Clone3 --> Master: 🎯 Return final
+    Master --> [*]: Complete
 ```
 
 ## Best Practices

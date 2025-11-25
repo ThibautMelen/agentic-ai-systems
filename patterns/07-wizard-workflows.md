@@ -11,50 +11,52 @@ Wizard-style workflows break complex tasks into discrete steps with explicit use
 ## Architecture
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#8b5cf6', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#7c3aed', 'lineColor': '#a78bfa'}}}%%
 stateDiagram-v2
-    [*] --> Analysis: User Request
+    [*] --> Analysis: 📥 User Request
 
-    Analysis --> Confirmation1: Present findings
-    Confirmation1 --> Planning: User approves
-    Confirmation1 --> Analysis: User requests changes
+    Analysis --> Confirmation1: 📊 Present findings
+    Confirmation1 --> Planning: ✅ User approves
+    Confirmation1 --> Analysis: 🔄 User requests changes
 
-    Planning --> Confirmation2: Present plan
-    Confirmation2 --> Implementation: User approves
-    Confirmation2 --> Planning: User requests changes
+    Planning --> Confirmation2: 📋 Present plan
+    Confirmation2 --> Implementation: ✅ User approves
+    Confirmation2 --> Planning: 🔄 User requests changes
 
-    Implementation --> Confirmation3: Show changes
-    Confirmation3 --> Verification: User approves
-    Confirmation3 --> Implementation: User requests changes
+    Implementation --> Confirmation3: 👀 Show changes
+    Confirmation3 --> Verification: ✅ User approves
+    Confirmation3 --> Implementation: 🔄 User requests changes
 
-    Verification --> [*]: Complete
+    Verification --> [*]: 🎉 Complete
 ```
 
 ## Typical Workflow Phases
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#8b5cf6', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#7c3aed', 'lineColor': '#a78bfa'}}}%%
 flowchart TB
-    subgraph Phase1["Phase 1: Analysis"]
+    subgraph Phase1["🔍 Phase 1: Analysis"]
         A1[Explore codebase]
         A2[Identify patterns]
         A3[Present findings]
         A4{User confirms?}
     end
 
-    subgraph Phase2["Phase 2: Planning"]
+    subgraph Phase2["📋 Phase 2: Planning"]
         P1[Create detailed plan]
         P2[Estimate impact]
         P3[Present plan]
         P4{User confirms?}
     end
 
-    subgraph Phase3["Phase 3: Implementation"]
+    subgraph Phase3["⚡ Phase 3: Implementation"]
         I1[Execute changes]
         I2[Run tests]
         I3[Present results]
         I4{User confirms?}
     end
 
-    subgraph Phase4["Phase 4: Verification"]
+    subgraph Phase4["✅ Phase 4: Verification"]
         V1[Final verification]
         V2[Documentation]
         V3[Complete]
@@ -73,6 +75,11 @@ flowchart TB
     I4 -->|No/Changes| I1
 
     V1 --> V2 --> V3
+
+    style Phase1 fill:#6366f1,stroke:#4f46e5,stroke-width:2px,color:#ffffff
+    style Phase2 fill:#ec4899,stroke:#db2777,stroke-width:2px,color:#ffffff
+    style Phase3 fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#ffffff
+    style Phase4 fill:#10b981,stroke:#059669,stroke-width:2px,color:#ffffff
 ```
 
 ## When to Use
@@ -165,17 +172,24 @@ class WizardWorkflow:
 ### Confirmation Points
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#8b5cf6', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#7c3aed', 'lineColor': '#a78bfa'}}}%%
 flowchart LR
-    subgraph Checkpoint["Confirmation Checkpoint"]
-        S[Summary of work done]
-        O[Options presented]
-        W[Wait for user input]
+    subgraph Checkpoint["🚦 Confirmation Checkpoint"]
+        S[📊 Summary of work done]
+        O[🔘 Options presented]
+        W[⏳ Wait for user input]
     end
 
-    Work[Phase Work] --> Checkpoint
-    Checkpoint --> Next[Next Phase]
-    Checkpoint --> Redo[Redo Phase]
-    Checkpoint --> Cancel[Cancel Workflow]
+    Work[⚡ Phase Work]:::workNode --> Checkpoint
+    Checkpoint --> Next[✅ Next Phase]:::nextNode
+    Checkpoint --> Redo[🔄 Redo Phase]:::redoNode
+    Checkpoint --> Cancel[❌ Cancel Workflow]:::cancelNode
+
+    style Checkpoint fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#ffffff
+    classDef workNode fill:#6366f1,stroke:#4f46e5,stroke-width:2px,color:#ffffff
+    classDef nextNode fill:#10b981,stroke:#059669,stroke-width:2px,color:#ffffff
+    classDef redoNode fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#ffffff
+    classDef cancelNode fill:#ef4444,stroke:#dc2626,stroke-width:2px,color:#ffffff
 ```
 
 ## Example: Database Migration Wizard
@@ -225,21 +239,22 @@ I've analyzed your database schema and found:
 ### Phase Design
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#8b5cf6', 'primaryTextColor': '#ffffff'}}}%%
 mindmap
-  root((Wizard Phases))
-    Analysis
+  root((🧙 Wizard Phases))
+    🔍 Analysis
       Gather information
       Identify risks
       Present findings
-    Planning
+    📋 Planning
       Detail steps
       Estimate impact
       Define rollback
-    Implementation
+    ⚡ Implementation
       Execute changes
       Log actions
       Handle errors
-    Verification
+    ✅ Verification
       Validate results
       Run tests
       Document outcome
@@ -311,13 +326,20 @@ For long wizards, persist state between interactions:
 ### Wizard + Subagents
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#8b5cf6', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#7c3aed', 'lineColor': '#a78bfa'}}}%%
 flowchart TB
-    W[Wizard Controller] --> Phase1
-    Phase1 --> |spawn| SA1[Analysis Subagent]
+    W[🧙 Wizard Controller]:::wizardNode --> Phase1[🔍 Phase 1]:::phase1Node
+    Phase1 --> |spawn| SA1[🤖 Analysis Subagent]:::subagentNode
     SA1 --> |results| W
-    W --> Confirm1{User Confirms}
-    Confirm1 --> Phase2
-    Phase2 --> |spawn| SA2[Implementation Subagent]
+    W --> Confirm1{✅ User Confirms}:::confirmNode
+    Confirm1 --> Phase2[⚡ Phase 2]:::phase2Node
+    Phase2 --> |spawn| SA2[🤖 Implementation Subagent]:::subagentNode
+
+    classDef wizardNode fill:#6366f1,stroke:#4f46e5,stroke-width:3px,color:#ffffff
+    classDef phase1Node fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#ffffff
+    classDef phase2Node fill:#ec4899,stroke:#db2777,stroke-width:2px,color:#ffffff
+    classDef subagentNode fill:#14b8a6,stroke:#0d9488,stroke-width:2px,color:#ffffff
+    classDef confirmNode fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#ffffff
 ```
 
 ### Wizard + Skills
