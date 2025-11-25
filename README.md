@@ -391,5 +391,5 @@ MIT License - See [LICENSE](LICENSE) for details.
 </p>
 
 <p align="center">
-  <sub>Made by <a href="https://github.com/SuperNovae-studio">SuperNovae Studio</a></sub>
+  <sub>Made with ❤️ by <a href="https://github.com/ThibautMelen">@ThibautMelen</a> 🏴‍☠️ <a href="https://github.com/SuperNovae-studio">SuperNovae Studio</a></sub>
 </p>
