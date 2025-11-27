@@ -308,6 +308,85 @@ Rule: 🧙 Wizard for destructive/critical operations only
 Rule: Any workflow > 10 minutes needs 🖥️ Multi-Window Context
 ```
 
+### 6. ❌ Too Many Parallel 🤖 Subagents
+
+```
+❌ WRONG: 39 🤖 subagents in parallel (context overflow)
+✅ RIGHT: Batch into waves of 10-15
+
+Rule: Max 10-15 concurrent subagents per wave
+```
+
+### 7. ❌ Long Runs Without `/compact`
+
+```
+❌ WRONG: 200 files generated without clearing context
+✅ RIGHT: /compact between major waves
+
+Rule: Use /compact after 50+ file generations or between major phases
+```
+
+---
+
+## Operational Decision Trees
+
+### When to Use `/compact`
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'lineColor': '#64748b'}}}%%
+flowchart TD
+    classDef yes fill:#10b981,stroke:#059669,stroke-width:2px,color:#ffffff
+    classDef no fill:#ef4444,stroke:#dc2626,stroke-width:2px,color:#ffffff
+    classDef decision fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#ffffff
+
+    START["🤔 Should I /compact?"] --> Q1{"Generated<br/>50+ files?"}:::decision
+
+    Q1 -->|Yes| COMPACT["✅ Yes, /compact"]:::yes
+    Q1 -->|No| Q2{"Between<br/>major phases?"}:::decision
+
+    Q2 -->|Yes| COMPACT
+    Q2 -->|No| Q3{"Context feels<br/>slow/heavy?"}:::decision
+
+    Q3 -->|Yes| COMPACT
+    Q3 -->|No| Q4{"Debugging<br/>an error?"}:::decision
+
+    Q4 -->|Yes| NOCOMPACT["❌ No, keep context"]:::no
+    Q4 -->|No| Q5{"Short workflow<br/>(<10 files)?"}:::decision
+
+    Q5 -->|Yes| NOCOMPACT
+    Q5 -->|No| COMPACT
+```
+
+**Critical**: Always 🖥️ checkpoint BEFORE `/compact` - context is lost after compaction!
+
+### How Many Parallel 🤖 Subagents
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'lineColor': '#64748b'}}}%%
+flowchart TD
+    classDef safe fill:#10b981,stroke:#059669,stroke-width:2px,color:#ffffff
+    classDef caution fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#ffffff
+    classDef danger fill:#ef4444,stroke:#dc2626,stroke-width:2px,color:#ffffff
+    classDef decision fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#ffffff
+
+    COUNT["🤖 How many subagents?"] --> Q1{"Count?"}:::decision
+
+    Q1 -->|"1-5"| SAFE["✅ Safe: Direct parallel"]:::safe
+    Q1 -->|"6-10"| CAUTION["⚠️ Caution: Monitor performance"]:::caution
+    Q1 -->|"11-15"| LIMIT["⚠️ Limit: Test first"]:::caution
+    Q1 -->|"16+"| BATCH["❌ Batch: Split into waves"]:::danger
+
+    BATCH --> WAVE["Wave 1: 10 🤖<br/>Wave 2: 10 🤖<br/>..."]:::safe
+```
+
+**Recommended limits:**
+
+| Type | Max | Action if exceeded |
+|------|-----|-------------------|
+| 🤖 Concurrent subagents | 10-15 | Batch into waves |
+| 🔌 MCP calls per agent | 5 | Respect rate limits |
+| 📤 Task calls per message | 10 | Split messages |
+
 ---
 
 ## Selection Flowchart: Complete

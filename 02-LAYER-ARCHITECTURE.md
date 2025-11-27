@@ -70,7 +70,7 @@ flowchart LR
     classDef main fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#ffffff
 
     subgraph UserLayer["👤 User Layer"]
-        NL["👤 Natural Language\n'Fix the bug'"]:::user
+        NL["👤 Natural Language<br>'Fix the bug'"]:::user
         SC["🦴 /command args"]:::user
         FR["📁 @file/path"]:::user
     end

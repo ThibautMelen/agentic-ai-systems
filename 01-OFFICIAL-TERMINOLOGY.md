@@ -44,6 +44,7 @@ A **Subagent** is an autonomous agent spawned by the 🧠 Main Agent via the �
 | **Autonomy** | Full - executes independently |
 | **Spawning** | ❌ Cannot spawn other subagents |
 | **Context** | Isolated from main conversation |
+| **Permissions** | Controlled via `permissionMode` frontmatter |
 
 ### File Structure
 
@@ -53,13 +54,26 @@ A **Subagent** is an autonomous agent spawned by the 🧠 Main Agent via the �
 ---
 name: code-reviewer
 description: Reviews code for quality, security, and best practices
-tools: Read, Grep, Glob
+permissionMode: acceptEdits
+allowed-tools: Read, Write, Grep, Glob
 ---
 
 You are a code review specialist. Your task is to...
 ```
 
-> **Note**: `tools` is a comma-separated string, not a YAML list.
+> **Note**: `allowed-tools` is a comma-separated string, not a YAML list.
+
+### Permission Modes
+
+Control how 🤖 Subagents request permissions for tool usage:
+
+| Mode | Behavior | Use Case |
+|------|----------|----------|
+| `default` | Asks permission for each tool | Read-only, validation |
+| `acceptEdits` | Auto-approves Write/Edit | Generation after 🧙 user confirmation |
+| `bypassPermissions` | All tools auto-approved | Trusted autonomous workflows |
+
+> **Best Practice**: Use `acceptEdits` after 🧙 Wizard confirmation to enable autonomous generation without repeated permission prompts.
 
 ### Usage Example
 

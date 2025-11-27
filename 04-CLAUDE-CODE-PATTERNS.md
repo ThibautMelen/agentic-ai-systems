@@ -756,6 +756,155 @@ Found issues. Continue? (y/n)
 
 ---
 
+## Operational Best Practices
+
+### Permission Modes
+
+Control how 🤖 Subagents request permissions for tool usage.
+
+**Available Modes:**
+
+| Mode | Behavior | Use Case |
+|------|----------|----------|
+| `default` | Asks permission for each tool call | Read-only operations, validation |
+| `acceptEdits` | Auto-approves Write/Edit operations | Generation after 🧙 user confirmation |
+| `bypassPermissions` | All tools auto-approved | Trusted autonomous workflows |
+
+**Implementation:**
+
+```yaml
+# .claude/agents/content-generator.md
+---
+name: content-generator
+description: Generates content files for specified locales
+permissionMode: acceptEdits
+allowed-tools: Read, Write, Glob, mcp__perplexity__*, mcp__firecrawl__*
+---
+
+You are a content generation specialist...
+```
+
+**Pattern: 🧙 Wizard Confirmation + `acceptEdits`**
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'lineColor': '#64748b'}}}%%
+flowchart LR
+    classDef wizard fill:#14b8a6,stroke:#0d9488,stroke-width:2px,color:#ffffff
+    classDef subagent fill:#ec4899,stroke:#db2777,stroke-width:2px,color:#ffffff
+
+    WIZARD["🧙 User Confirms<br>Generation Plan"]:::wizard
+    SPAWN["📤 Spawn 🤖 Subagent<br>permissionMode: acceptEdits"]:::subagent
+    EXEC["✅ Autonomous Execution<br>No further prompts"]:::subagent
+
+    WIZARD --> SPAWN --> EXEC
+```
+
+> **Best Practice**: Use 🧙 Wizard confirmation before spawning subagents with elevated permissions. User approves the plan once, then execution is autonomous.
+
+---
+
+### Parallelization Limits
+
+Practical limits for stable parallel execution.
+
+| Type | Recommended Max | Risk if Exceeded |
+|------|-----------------|------------------|
+| 🤖 Concurrent Subagents | **10-15** | Context overflow, memory pressure |
+| 🔌 MCP calls per subagent | **5** | Rate limit errors |
+| 📤 Task calls per message | **10** | API limits, timeouts |
+
+**Batching Strategy for Large Workloads:**
+
+```
+# Instead of 39 parallel subagents for en-* cluster:
+Wave 1: 10 🤖 subagents (en-GB, en-CA, en-AU...)
+Wave 2: 10 🤖 subagents (en-IN, en-IE, en-NZ...)
+Wave 3: 10 🤖 subagents (en-ZA, en-SG, en-PH...)
+Wave 4:  8 🤖 subagents (remaining)
+```
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'lineColor': '#64748b'}}}%%
+gantt
+    title Batched Parallelization (39 locales)
+    dateFormat X
+    axisFormat %s
+
+    section Wave 1
+    10 🤖 subagents    :active, 0, 10
+
+    section Wave 2
+    10 🤖 subagents    :active, 10, 20
+
+    section Wave 3
+    10 🤖 subagents    :active, 20, 30
+
+    section Wave 4
+    8 🤖 subagents     :active, 30, 38
+```
+
+> **Empirical**: Test limits in your environment. Start conservative (5-10), increase gradually.
+
+---
+
+### Context Management with `/compact`
+
+Long-running workflows accumulate context. Use `/compact` between major phases to prevent overflow.
+
+**Problem:**
+
+```
+Wave 1: +50,000 tokens context
+Wave 2: +50,000 tokens context
+Wave 3: +50,000 tokens context → ❌ Context limit exceeded!
+```
+
+**Solution:**
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'lineColor': '#64748b'}}}%%
+flowchart LR
+    classDef wave fill:#3b82f6,stroke:#2563eb,stroke-width:2px,color:#ffffff
+    classDef compact fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#ffffff
+    classDef checkpoint fill:#10b981,stroke:#059669,stroke-width:2px,color:#ffffff
+
+    W1["🚂 Wave 1"]:::wave
+    CP1["🖥️ Checkpoint"]:::checkpoint
+    C1["/compact"]:::compact
+
+    W2["🚂 Wave 2"]:::wave
+    CP2["🖥️ Checkpoint"]:::checkpoint
+    C2["/compact"]:::compact
+
+    W3["🚂 Wave 3"]:::wave
+    DONE["✅ Complete"]:::checkpoint
+
+    W1 --> CP1 --> C1 --> W2 --> CP2 --> C2 --> W3 --> DONE
+```
+
+**Pattern: Checkpoint → Compact → Resume**
+
+```python
+# After each wave:
+1. Save checkpoint (state persisted to file)
+2. /compact (clears conversation history)
+3. Load checkpoint (restore state from file)
+4. Continue next wave
+```
+
+> **Critical**: `/compact` clears history but preserves CLAUDE.md context. Always checkpoint BEFORE compacting.
+
+**When to `/compact`:**
+
+| Scenario | Compact? | Why |
+|----------|----------|-----|
+| After generating 50+ files | ✅ Yes | Large output accumulation |
+| Between independent waves | ✅ Yes | Fresh context per wave |
+| Mid-phase during errors | ❌ No | Need error context for debugging |
+| Short workflow (<10 files) | ❌ No | Unnecessary overhead |
+
+---
+
 ## Combining Patterns: Real Example
 
 ### AthenaKNW Locale Generation
