@@ -2,7 +2,7 @@
 
 # Agentic AI Systems 🐔
 
-**Agentic patterns explained with chickens — because AI orchestration doesn't have to be scary**
+**Agentic systems explained with chickens — because AI orchestration doesn't have to be scary**
 
 *Main Agent spawns Subagents like a hen with her chicks 🐔🪺🐦*
 
