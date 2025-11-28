@@ -4,9 +4,12 @@
 
 **Workflows and agents for building agentic AI systems | Explained simply**
 
-[![Claude Code CLI](https://img.shields.io/badge/Claude_Code-CLI-8b5cf6?style=flat-square)](https://docs.anthropic.com/en/docs/claude-code)
-[![Based on Anthropic Research](https://img.shields.io/badge/Based_on-Anthropic_Research-ec4899?style=flat-square)](https://www.anthropic.com/research/building-effective-agents)
-[![Awesome Claude Code](https://awesome.re/mentioned-badge-flat.svg)](https://github.com/hesreallyhim/awesome-claude-code)
+[![Claude Code](https://img.shields.io/badge/Claude_Code-CLI-8b5cf6?style=flat-square&logo=anthropic&logoColor=white)](https://docs.anthropic.com/en/docs/claude-code)
+[![Anthropic Research](https://img.shields.io/badge/Anthropic-Research-ec4899?style=flat-square&logo=anthropic&logoColor=white)](https://www.anthropic.com/research/building-effective-agents)
+[![Awesome](https://awesome.re/mentioned-badge-flat.svg)](https://github.com/hesreallyhim/awesome-claude-code)
+[![License](https://img.shields.io/badge/License-MIT-10b981?style=flat-square)](LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-06b6d4?style=flat-square)](CONTRIBUTING.md)
+[![Mermaid Diagrams](https://img.shields.io/badge/Mermaid-Diagrams-f59e0b?style=flat-square&logo=mermaid&logoColor=white)](https://mermaid.js.org/)
 
 [🧱 Foundations](foundations/) • [⚙️ Workflows](workflows/) • [🐉 Agents](agents/) • [🛠️ Implementation](implementation/) • [🗺️ Guides](guides/)
 
