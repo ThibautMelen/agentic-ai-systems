@@ -1,6 +1,8 @@
 <div align="center">
 
-[🏠 Home](../../README.md) • [📘 Guides](../README.md) • [🎯 Use Cases](./) • **Production Code Review**
+[🏠 Home](../../README.md) › [📘 Guides](../README.md) › [🎯 Use Cases](./) › **Production Code Review**
+
+[← Multi-Agent Research](multi-agent-research.md) ━━━━━━━━━━●━━━━━━━━━━━━━━━━━━━━━━━━ [Multi-Locale Generation →](multi-locale-generation.md)
 
 </div>
 
@@ -208,8 +210,6 @@ def review_pr(pr_files):
 
 <div align="center">
 
-**━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━**
-
-[← Multi-Agent Research](multi-agent-research.md) • [🎯 Use Cases](./) • [Multi-Locale Generation →](multi-locale-generation.md)
+[← Multi-Agent Research](multi-agent-research.md) ━━━━━━━━━━●━━━━━━━━━━━━━━━━━━━━━━━━ [Multi-Locale Generation →](multi-locale-generation.md)
 
 </div>

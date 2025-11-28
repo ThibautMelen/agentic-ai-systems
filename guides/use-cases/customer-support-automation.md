@@ -1,6 +1,8 @@
 <div align="center">
 
-[🏠 Home](../../README.md) • [📘 Guides](../README.md) • [🎯 Use Cases](./) • **Customer Support**
+[🏠 Home](../../README.md) › [📘 Guides](../README.md) › [🎯 Use Cases](./) › **Customer Support**
+
+[← Personal Assistant](intelligent-personal-assistant.md) ━━━━━━━━━━━━━━━━━━━━━━━━━━━━●━━━━━ [Data Migration →](data-pipeline-migration.md)
 
 </div>
 
@@ -266,8 +268,6 @@ flowchart LR
 
 <div align="center">
 
-**━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━**
-
-[← Personal Assistant](intelligent-personal-assistant.md) • [🎯 Use Cases](./) • [Data Migration →](data-pipeline-migration.md)
+[← Personal Assistant](intelligent-personal-assistant.md) ━━━━━━━━━━━━━━━━━━━━━━━━━━━━●━━━━━ [Data Migration →](data-pipeline-migration.md)
 
 </div>

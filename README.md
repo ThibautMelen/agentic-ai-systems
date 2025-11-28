@@ -1,11 +1,8 @@
 <div align="center">
 
-# Agentic AI Systems 🐔
+# Agentic AI Systems
 
 **Workflows and agents for building agentic AI systems | Explained simply**
-
-<sub>Mermaid diagrams 📊 • Clear examples 💡 • Chicken metaphors 🐔🐦<br/>
-Because complex systems deserve simple explanations.</sub>
 
 <br/>
 
@@ -18,6 +15,10 @@ Because complex systems deserve simple explanations.</sub>
 <a href="https://github.com/hesreallyhim/awesome-claude-code">
   <img src="https://awesome.re/mentioned-badge-flat.svg" alt="Awesome Claude Code"/>
 </a>
+
+<br/><br/>
+
+[Foundations](foundations/) • [Workflows](workflows/) • [Agents](agents/) • [Implementation](implementation/) • [Guides](guides/)
 
 </div>
 

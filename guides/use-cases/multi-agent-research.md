@@ -1,6 +1,8 @@
 <div align="center">
 
-[🏠 Home](../../README.md) • [📘 Guides](../README.md) • [🎯 Use Cases](./) • **Multi-Agent Research**
+[🏠 Home](../../README.md) › [📘 Guides](../README.md) › [🎯 Use Cases](./) › **Multi-Agent Research**
+
+[← Use Cases](./) ━━●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ [Production Code Review →](production-code-review.md)
 
 </div>
 
@@ -145,8 +147,6 @@ Focus on peer-reviewed sources and cite properly.
 
 <div align="center">
 
-**━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━**
-
-[🎯 Use Cases](./) • [Production Code Review →](production-code-review.md)
+[← Use Cases](./) ━━●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ [Production Code Review →](production-code-review.md)
 
 </div>

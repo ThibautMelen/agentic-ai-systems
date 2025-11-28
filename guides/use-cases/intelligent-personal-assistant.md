@@ -1,6 +1,8 @@
 <div align="center">
 
-[🏠 Home](../../README.md) • [📘 Guides](../README.md) • [🎯 Use Cases](./) • **Personal Assistant**
+[🏠 Home](../../README.md) › [📘 Guides](../README.md) › [🎯 Use Cases](./) › **Personal Assistant**
+
+[← Multi-Locale Generation](multi-locale-generation.md) ━━━━━━━━━━━━━━━━━━━━━━━●━━━━━━━━━━━━ [Customer Support →](customer-support-automation.md)
 
 </div>
 
@@ -233,8 +235,6 @@ Response: "Here are the latest developments in quantum computing:
 
 <div align="center">
 
-**━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━**
-
-[← Multi-Locale Generation](multi-locale-generation.md) • [🎯 Use Cases](./) • [Customer Support →](customer-support-automation.md)
+[← Multi-Locale Generation](multi-locale-generation.md) ━━━━━━━━━━━━━━━━━━━━━━━●━━━━━━━━━━━━ [Customer Support →](customer-support-automation.md)
 
 </div>

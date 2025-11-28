@@ -1,6 +1,8 @@
 <div align="center">
 
-[🏠 Home](../../README.md) • [📘 Guides](../README.md) • [🎯 Use Cases](./) • **Data Migration**
+[🏠 Home](../../README.md) › [📘 Guides](../README.md) › [🎯 Use Cases](./) › **Data Migration**
+
+[← Customer Support](customer-support-automation.md) ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━●━━ [Use Cases →](./)
 
 </div>
 
@@ -270,8 +272,6 @@ flowchart TB
 
 <div align="center">
 
-**━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━**
-
-[← Customer Support](customer-support-automation.md) • [🎯 Use Cases](./)
+[← Customer Support](customer-support-automation.md) ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━●━━ [Use Cases →](./)
 
 </div>

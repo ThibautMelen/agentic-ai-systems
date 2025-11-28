@@ -1,6 +1,8 @@
 <div align="center">
 
-[🏠 Home](../../README.md) • [📘 Guides](../README.md) • [🎯 Use Cases](./) • **Multi-Locale Generation**
+[🏠 Home](../../README.md) › [📘 Guides](../README.md) › [🎯 Use Cases](./) › **Multi-Locale Generation**
+
+[← Production Code Review](production-code-review.md) ━━━━━━━━━━━━━━━━━●━━━━━━━━━━━━━━━━━━ [Personal Assistant →](intelligent-personal-assistant.md)
 
 </div>
 
@@ -186,8 +188,6 @@ Generate variant content that:
 
 <div align="center">
 
-**━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━**
-
-[← Production Code Review](production-code-review.md) • [🎯 Use Cases](./) • [Personal Assistant →](intelligent-personal-assistant.md)
+[← Production Code Review](production-code-review.md) ━━━━━━━━━━━━━━━━━●━━━━━━━━━━━━━━━━━━ [Personal Assistant →](intelligent-personal-assistant.md)
 
 </div>
