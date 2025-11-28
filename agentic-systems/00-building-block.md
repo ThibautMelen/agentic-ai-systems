@@ -10,7 +10,7 @@
 
 # 🧱 Building Block: The Augmented LLM
 
-> **TL;DR:** The foundation of ALL agentic systems — an LLM enhanced with retrieval, tools, and memory. Every pattern builds on this.
+> **TL;DR:** The foundation of ALL agentic systems — an LLM enhanced with retrieval, tools, and memory. Every workflow builds on this.
 
 ---
 
@@ -61,7 +61,7 @@ All workflows assume each LLM call has access to these augmented capabilities.
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                    🧱 BUILDING BLOCK = AUGMENTED LLM                        │
-│                       (foundation for ALL patterns)                         │
+│                       (foundation for ALL workflows)                        │
 ├───────────────┬───────────────┬───────────────┬─────────────────────────────┤
 │   Retrieval   │    Tools      │    Memory     │            LLM              │
 │   (RAG/docs)  │   (actions)   │   (context)   │           (core)            │

@@ -8,7 +8,7 @@
 
 # Agentic Systems
 
-> **TL;DR:** Complete reference for AI orchestration patterns. From single LLM calls to fully autonomous agents.
+> **TL;DR:** Complete reference for AI orchestration — workflows and agents. From single LLM calls to fully autonomous agents.
 
 ---
 
@@ -60,9 +60,9 @@ mindmap
 
 ---
 
-## Pattern Index
+## Workflow Index
 
-| # | Pattern | Emoji | Description | Complexity |
+| # | Workflow | Emoji | Description | Complexity |
 |:-:|---------|:-----:|-------------|:----------:|
 | 0 | [Building Block](00-building-block.md) | 🧱 | Augmented LLM foundation | — |
 | 1 | [Baseline](01-baseline.md) | 🏎️ | Single LLM call, no orchestration | None |
@@ -131,7 +131,7 @@ Long-Running (>10 min)        → 🖥️ Multi-Window Context
 
 ## Cross-Platform Compatibility
 
-| Pattern | Claude | GPT Agents | Gemini ADK | LangGraph |
+| Workflow | Claude | GPT Agents | Gemini ADK | LangGraph |
 |:--------|:------:|:----------:|:----------:|:---------:|
 | 🦑 Orchestrator-Workers | ✅ | ✅ Handoffs | ✅ Multi-agent | ✅ Subgraphs |
 | 📚 Progressive Skills | ✅ | ❌ | ❌ | ❌ |
@@ -151,7 +151,7 @@ Long-Running (>10 min)        → 🖥️ Multi-Window Context
 |---------|-------------|
 | [🧩 Components](../components/) | Subagent, Slash Command, Skill, Hook |
 | [🏗️ Architecture](../architecture/) | 5-Layer system design |
-| [🗺️ Guides](../guides/) | Pattern selection & use cases |
+| [🗺️ Guides](../guides/) | Workflow selection & use cases |
 | [📖 Reference](../reference/) | Glossary, visual standards |
 
 ---

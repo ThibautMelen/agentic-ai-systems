@@ -56,7 +56,7 @@ flowchart TB
 
 ---
 
-## Implementation Pattern
+## Implementation
 
 ```
 Session 1:

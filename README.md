@@ -2,10 +2,10 @@
 
 # Agentic AI Systems 🐔
 
-**Design patterns for building agentic AI systems | Explained simply**
+**Design workflows for building agentic AI systems | Explained simply**
 
 <sub>Mermaid diagrams 📊 • Clear examples 💡 • Chicken metaphors 🐔🐦<br/>
-Because complex patterns deserve simple explanations.</sub>
+Because complex workflows deserve simple explanations.</sub>
 
 <br/>
 
@@ -23,7 +23,7 @@ Because complex patterns deserve simple explanations.</sub>
 <br/>
 
 <!-- Stats -->
-<img src="https://img.shields.io/badge/Patterns-9-8b5cf6?style=flat-square" alt="9 Patterns"/>
+<img src="https://img.shields.io/badge/Workflows-9-8b5cf6?style=flat-square" alt="9 Workflows"/>
 <img src="https://img.shields.io/badge/Components-4-ec4899?style=flat-square" alt="4 Components"/>
 <img src="https://img.shields.io/badge/Architecture-5_Layers-10b981?style=flat-square" alt="5 Layers"/>
 <img src="https://img.shields.io/badge/🏴‍☠️🪐-SuperNovae-1e293b?style=flat-square" alt="SuperNovae Studio"/>
@@ -34,7 +34,7 @@ Because complex patterns deserve simple explanations.</sub>
 
 ## Why This Repo? 🪺
 
-Building effective AI agents requires proven patterns, not guesswork.
+Building effective AI agents requires proven workflows, not guesswork.
 
 This repository distills **official Anthropic documentation** into actionable designs:
 
@@ -42,8 +42,8 @@ This repository distills **official Anthropic documentation** into actionable de
 |--------------|----------------|
 | 📊 **Mermaid diagrams** | See the architecture, don't just read about it |
 | 💡 **Clear examples** | Copy-paste ready, not abstract theory |
-| 🗺️ **Decision guides** | Know which pattern fits your use case |
-| 🐔 **Chicken metaphors** | Remember patterns, not jargon |
+| 🗺️ **Decision guides** | Know which workflow fits your use case |
+| 🐔 **Chicken metaphors** | Remember workflows, not jargon |
 
 *Why chickens? Because 🐔 Main Agent spawning 🐦 Subagents is way easier to remember than "hierarchical agent orchestration".*
 
@@ -56,9 +56,9 @@ This repository distills **official Anthropic documentation** into actionable de
 <td width="50%" valign="top">
 
 ### 📚 Agentic Systems
-**Theory & Patterns** — [Browse →](agentic-systems/)
+**Theory & Workflows** — [Browse →](agentic-systems/)
 
-| # | Pattern | Link |
+| # | Workflow | Link |
 |:-:|---------|:----:|
 | 0 | 🧱 Building Block | [→](agentic-systems/00-building-block.md) |
 | 1 | 🏎️ Baseline | [→](agentic-systems/01-baseline.md) |
@@ -102,7 +102,7 @@ This repository distills **official Anthropic documentation** into actionable de
 <td width="50%" valign="top">
 
 ### 🗺️ Guides
-**Pattern selection** — [Browse →](guides/)
+**Workflow selection** — [Browse →](guides/)
 
 - [Selection Guide](guides/README.md)
 - [Use Cases](guides/use-cases/)
@@ -217,7 +217,7 @@ Long-Running (>10 min)        → 🖥️ Multi-Window Context
 
 ## Cross-Platform Compatibility
 
-| Pattern | Claude | GPT Agents | Gemini ADK | LangGraph |
+| Workflow | Claude | GPT Agents | Gemini ADK | LangGraph |
 |:--------|:------:|:----------:|:----------:|:---------:|
 | 🦑 Orchestrator-Workers | ✅ | ✅ Handoffs | ✅ Multi-agent | ✅ Subgraphs |
 | 📚 Progressive Skills | ✅ | ❌ | ❌ | ❌ |
@@ -235,7 +235,7 @@ Long-Running (>10 min)        → 🖥️ Multi-Window Context
 ```
 .
 ├── README.md                    # 🏠 This file (navigation hub)
-├── agentic-systems/             # 📚 Theory & Patterns (9 files)
+├── agentic-systems/             # 📚 Theory & Workflows (9 files)
 │   ├── README.md                # Overview + index
 │   ├── 00-building-block.md     # Augmented LLM foundation
 │   ├── 01-baseline.md           # Direct execution
@@ -249,7 +249,7 @@ Long-Running (>10 min)        → 🖥️ Multi-Window Context
 ├── implementation/              # 🛠️ How to build
 │   ├── components/              # 🧩 4 Claude Code components
 │   └── architecture/            # 🏗️ 5-layer system
-├── guides/                      # 🗺️ Pattern selection
+├── guides/                      # 🗺️ Workflow selection
 │   └── use-cases/               # 6 validated examples
 └── reference/                   # 📖 Quick lookups
     ├── glossary.md              # A-Z definitions
@@ -272,21 +272,21 @@ Long-Running (>10 min)        → 🖥️ Multi-Window Context
 
 ## Contributing
 
-We welcome contributions! This repository aims to be the definitive collection of Claude agentic patterns.
+We welcome contributions! This repository aims to be the definitive collection of Claude agentic workflows.
 
 ### Ways to Contribute
 
-- **Add new patterns** — Document systems from Anthropic sources
+- **Add new workflows** — Document systems from Anthropic sources
 - **Improve existing content** — Add examples, clarify explanations
 - **Fix issues** — Correct errors, update outdated information
-- **Add translations** — Help make patterns accessible globally
+- **Add translations** — Help make workflows accessible globally
 
 ### Requirements
 
 All contributions must:
 1. **Reference official sources** — Link to Anthropic docs or blog posts
 2. **Include code examples** — Provide working, tested snippets
-3. **Follow the pattern format** — Use the established template
+3. **Follow the workflow format** — Use the established template
 4. **Add Mermaid diagrams** — Visual explanations where helpful
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.

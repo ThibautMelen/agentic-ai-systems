@@ -10,7 +10,7 @@
 
 # 🏎️ Baseline (Direct Execution)
 
-> **TL;DR:** Single augmented LLM call without orchestration. The simplest possible agentic pattern — use when tasks need no complexity.
+> **TL;DR:** Single augmented LLM call without orchestration. The simplest baseline — use when tasks need no complexity.
 
 ---
 
