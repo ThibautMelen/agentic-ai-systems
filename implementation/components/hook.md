@@ -1,6 +1,8 @@
 <div align="center">
 
-[🏠 Home](../../README.md) • [🔧 Implementation](../README.md) • [📦 Components](./) • **🪝 Hook**
+[🏠 Home](../../README.md) › [🔧 Implementation](../README.md) › [📦 Components](./) › **🪝 Hook**
+
+[← 📚 Skill](skill.md) ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━●━━ [Components →](./)
 
 </div>
 
@@ -270,8 +272,6 @@ Uses LLM (via Haiku) for context-aware evaluation.
 
 <div align="center">
 
-**━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━**
-
-[← 📚 Skill](skill.md) • [📦 Components](./)
+[← 📚 Skill](skill.md) ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━●━━ [Components →](./)
 
 </div>

@@ -2,6 +2,8 @@
 
 [🏠 Home](../README.md) › [Foundations](./) › **🧱 Augmented LLM**
 
+[← Foundations](./) ━━━━━━━━━━━━━━━━━━●━━━━━━━━━━━━━━━━━━ [Workflows →](../workflows/)
+
 </div>
 
 ---
@@ -113,6 +115,6 @@ flowchart LR
 
 <div align="center">
 
-[🏠 Home](../README.md) • [Workflows →](../workflows/)
+[← Foundations](./) ━━━━━━━━━━━━━━━━━━●━━━━━━━━━━━━━━━━━━ [Workflows →](../workflows/)
 
 </div>

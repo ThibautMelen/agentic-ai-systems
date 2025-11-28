@@ -2,7 +2,7 @@
 
 [🏠 Home](../README.md) › [Workflows](./) › **🩻 Evaluator-Optimizer**
 
-`━━━━━━━━━━━━━━━━━━━━━━━━━━●━━━━━━━━━` **5/5** Evaluator-Optimizer
+[← 04 Orchestrator-Workers](04-orchestrator-workers.md) ━━━━━━━━━━━━━━━━━━━━━━━━━━●━━━━━━━━━ [Agents →](../agents/)
 
 </div>
 
@@ -145,10 +145,6 @@ sequenceDiagram
 
 <div align="center">
 
-```
-━━━━━━━━━━━━━━━━━━━━━━━━━━●━━━━━━━━━ 5/5
-```
-
-[← 04 Orchestrator-Workers](04-orchestrator-workers.md) • [Agents →](../agents/)
+[← 04 Orchestrator-Workers](04-orchestrator-workers.md) ━━━━━━━━━━━━━━━━━━━━━━━━━━●━━━━━━━━━ [Agents →](../agents/)
 
 </div>

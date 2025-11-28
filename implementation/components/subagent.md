@@ -1,6 +1,8 @@
 <div align="center">
 
-[🏠 Home](../../README.md) • [🔧 Implementation](../README.md) • [📦 Components](./) • **🐦 Subagent**
+[🏠 Home](../../README.md) › [🔧 Implementation](../README.md) › [📦 Components](./) › **🐦 Subagent**
+
+[← Components](./) ━━●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ [🦴 Slash Command →](slash-command.md)
 
 </div>
 
@@ -273,8 +275,6 @@ project/
 
 <div align="center">
 
-**━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━**
-
-[📦 Components](./) • [🦴 Slash Command →](slash-command.md)
+[← Components](./) ━━●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ [🦴 Slash Command →](slash-command.md)
 
 </div>

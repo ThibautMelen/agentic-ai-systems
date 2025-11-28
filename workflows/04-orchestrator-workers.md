@@ -2,7 +2,7 @@
 
 [🏠 Home](../README.md) › [Workflows](./) › **🦑 Orchestrator-Workers**
 
-`━━━━━━━━━━━━━━━━━━━━━●━━━━━━━━━━━━━━` **4/5** Orchestrator-Workers
+[← 03 Parallelization](03-parallelization.md) ━━━━━━━━━━━━━━━━━━━━━●━━━━━━━━━━━━━━ [05 Evaluator-Optimizer →](05-evaluator-optimizer.md)
 
 </div>
 
@@ -194,10 +194,6 @@ Task(
 
 <div align="center">
 
-```
-━━━━━━━━━━━━━━━━━━━━━●━━━━━━━━━━━━━━ 4/5
-```
-
-[← 03 Parallelization](03-parallelization.md) • [05 Evaluator-Optimizer →](05-evaluator-optimizer.md)
+[← 03 Parallelization](03-parallelization.md) ━━━━━━━━━━━━━━━━━━━━━●━━━━━━━━━━━━━━ [05 Evaluator-Optimizer →](05-evaluator-optimizer.md)
 
 </div>

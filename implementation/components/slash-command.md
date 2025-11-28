@@ -1,6 +1,8 @@
 <div align="center">
 
-[🏠 Home](../../README.md) • [🔧 Implementation](../README.md) • [📦 Components](./) • **🦴 Slash Command**
+[🏠 Home](../../README.md) › [🔧 Implementation](../README.md) › [📦 Components](./) › **🦴 Slash Command**
+
+[← 🐦 Subagent](subagent.md) ━━━━━━━━━━━●━━━━━━━━━━━━━━━━━━━━━━━━ [📚 Skill →](skill.md)
 
 </div>
 
@@ -112,8 +114,6 @@ Execute the following reviews in sequence:
 
 <div align="center">
 
-**━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━**
-
-[← 🐦 Subagent](subagent.md) • [📦 Components](./) • [📚 Skill →](skill.md)
+[← 🐦 Subagent](subagent.md) ━━━━━━━━━━━●━━━━━━━━━━━━━━━━━━━━━━━━ [📚 Skill →](skill.md)
 
 </div>

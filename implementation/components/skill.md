@@ -1,6 +1,8 @@
 <div align="center">
 
-[🏠 Home](../../README.md) • [🔧 Implementation](../README.md) • [📦 Components](./) • **📚 Skill**
+[🏠 Home](../../README.md) › [🔧 Implementation](../README.md) › [📦 Components](./) › **📚 Skill**
+
+[← 🦴 Slash Command](slash-command.md) ━━━━━━━━━━━━━━━━━━━━━●━━━━━━━━━━━━━━ [🪝 Hook →](hook.md)
 
 </div>
 
@@ -147,8 +149,6 @@ description: Use when debugging errors or unexpected behavior - systematic root 
 
 <div align="center">
 
-**━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━**
-
-[← 🦴 Slash Command](slash-command.md) • [📦 Components](./) • [🪝 Hook →](hook.md)
+[← 🦴 Slash Command](slash-command.md) ━━━━━━━━━━━━━━━━━━━━━●━━━━━━━━━━━━━━ [🪝 Hook →](hook.md)
 
 </div>

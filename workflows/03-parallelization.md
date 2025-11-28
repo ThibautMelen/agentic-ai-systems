@@ -2,7 +2,7 @@
 
 [🏠 Home](../README.md) › [Workflows](./) › **🛤️ Parallelization**
 
-`━━━━━━━━━━━━━━━━●━━━━━━━━━━━━━━━━━━━` **3/5** Parallelization
+[← 02 Routing](02-routing.md) ━━━━━━━━━━━━━━━━●━━━━━━━━━━━━━━━━━━━ [04 Orchestrator-Workers →](04-orchestrator-workers.md)
 
 </div>
 
@@ -230,10 +230,6 @@ flowchart TB
 
 <div align="center">
 
-```
-━━━━━━━━━━━━━━━━●━━━━━━━━━━━━━━━━━━━ 3/5
-```
-
-[← 02 Routing](02-routing.md) • [04 Orchestrator-Workers →](04-orchestrator-workers.md)
+[← 02 Routing](02-routing.md) ━━━━━━━━━━━━━━━━●━━━━━━━━━━━━━━━━━━━ [04 Orchestrator-Workers →](04-orchestrator-workers.md)
 
 </div>

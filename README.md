@@ -26,7 +26,7 @@ Because complex systems deserve simple explanations.</sub>
 ## Overview
 
 ```mermaid
-%%{init: {'theme': 'dark', 'themeVariables': { 'primaryColor': '#8b5cf6', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#a78bfa', 'lineColor': '#ec4899', 'secondaryColor': '#6366f1', 'tertiaryColor': '#06b6d4' }}}%%
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#8b5cf6', 'primaryTextColor': '#fff', 'primaryBorderColor': '#7c3aed', 'lineColor': '#a78bfa', 'secondaryColor': '#ec4899', 'tertiaryColor': '#6366f1', 'noteTextColor': '#fff', 'noteBkgColor': '#8b5cf6', 'textColor': '#fff' }}}%%
 mindmap
   root((🐔 Agentic Systems))
     🧱 Foundations

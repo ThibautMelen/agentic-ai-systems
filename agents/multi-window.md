@@ -2,7 +2,7 @@
 
 [🏠 Home](../README.md) › [Agents](./) › **🖥️ Multi-Window Context**
 
-`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━●━━` **2/2** Multi-Window Context
+[← Autonomous Agents](autonomous.md) ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━●━━ [Agents →](./)
 
 </div>
 
@@ -219,10 +219,6 @@ if os.path.exists(checkpoint_file):
 
 <div align="center">
 
-```
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━●━━ 2/2
-```
-
-[← Autonomous Agents](autonomous.md) • [Agents](./)
+[← Autonomous Agents](autonomous.md) ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━●━━ [Agents →](./)
 
 </div>
