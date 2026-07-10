@@ -125,6 +125,13 @@ stateDiagram-v2
 
 ---
 
+
+---
+
+## 📜 This pattern, as a file
+
+Runnable version (offline mock, no API key · `nika check` proves the DAG before any token is spent): [`patterns-as-code/01-prompt-chaining.nika.yaml`](../patterns-as-code/01-prompt-chaining.nika.yaml) — see [Patterns as Code](../patterns-as-code/).
+
 <div align="center">
 
 [← 00 Baseline](00-baseline.md) ━━━━━━●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ [02 Routing →](02-routing.md)

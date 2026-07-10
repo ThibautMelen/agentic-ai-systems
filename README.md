@@ -14,7 +14,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-06b6d4?style=flat-square)](CONTRIBUTING.md)
 [![Mermaid](https://img.shields.io/badge/Mermaid-Diagrams-f59e0b?style=flat-square&logo=mermaid&logoColor=white)](https://mermaid.js.org/)
 
-[🦄 Foundations](foundations/) • [⚙️ Workflows](workflows/) • [🐔 Autonomous](agents/) • [🛠️ Implementation](implementation/) • [🗺️ Guides](guides/)
+[🦄 Foundations](foundations/) • [⚙️ Workflows](workflows/) • [🐔 Autonomous](agents/) • [📜 As Code](patterns-as-code/) • [🛠️ Implementation](implementation/) • [🗺️ Guides](guides/)
 
 </div>
 
@@ -28,6 +28,7 @@ mindmap
   root((🐔 Agentic Systems))
     🦄 Foundations
       Augmented LLM
+      What Changed 2026
     ⚙️ Workflows
       🏎️ Baseline
       ⛓️ Chaining
@@ -43,6 +44,9 @@ mindmap
       🦴 Command
       📚 Skill
       🪝 Hook
+    📜 Patterns as Code
+      Check before
+      Trace after
 ```
 
 ---
@@ -59,6 +63,7 @@ mindmap
 | | |
 |---|---|
 | [🦄 Augmented LLM](foundations/augmented-llm.md) | LLM + Retrieval + Tools + Memory |
+| [🗞️ What Changed 2025-2026](foundations/what-changed-2026.md) | Context engineering · skills/MCP stack · harness era |
 
 ---
 
@@ -104,6 +109,7 @@ mindmap
 | Resource | Description |
 |----------|-------------|
 | [Selection Guide](guides/README.md) | Choose the right pattern |
+| [📜 Patterns as Code](patterns-as-code/) | Every pattern as a runnable, checkable file |
 | [Use Cases](guides/use-cases/) | 6 validated examples |
 | [Glossary](reference/glossary.md) | A-Z definitions |
 | [Visual Standards](reference/visual-standards.md) | Colors & emojis |
@@ -273,6 +279,9 @@ flowchart LR
 | Claude Code Docs | [docs.anthropic.com](https://docs.anthropic.com/en/docs/claude-code) |
 | Agent SDK | [docs.anthropic.com/agent-sdk](https://docs.anthropic.com/docs/en/agent-sdk) |
 | Anthropic Cookbook | [github.com/anthropics](https://github.com/anthropics/anthropic-cookbook) |
+| Agent Skills spec | [agentskills.io](https://agentskills.io/specification) |
+| Agentic AI Foundation (MCP · AGENTS.md · goose) | [aaif.io](https://aaif.io/) |
+| Patterns as runnable files (this repo) | [patterns-as-code/](patterns-as-code/) |
 
 ---
 
@@ -286,7 +295,7 @@ Contributions welcome! See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 <div align="center">
 
-<sub>Built with Claude Code | Based on Anthropic documentation | 2025</sub><br/>
+<sub>Built with Claude Code | Based on Anthropic documentation | 2025-2026</sub><br/>
 <sub>Independent community resource — not affiliated with Anthropic</sub>
 
 <br/>

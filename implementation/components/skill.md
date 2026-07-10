@@ -152,3 +152,6 @@ description: Use when debugging errors or unexpected behavior - systematic root 
 [← 🦴 Slash Command](slash-command.md) ━━━━━━━━━━━━━━━━━━━━━●━━━━━━━━━━━━━━ [🪝 Hook →](hook.md)
 
 </div>
+
+> 🗞️ **2026 note:** SKILL.md outgrew Claude Code — it's an open spec since Dec 2025 ([agentskills.io](https://agentskills.io/specification)) read by 30+ platforms (Hermes, opencode, goose…). What this page teaches transfers. See [What Changed 2026](../../foundations/what-changed-2026.md).
+

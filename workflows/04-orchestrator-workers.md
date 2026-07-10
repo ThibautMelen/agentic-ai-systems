@@ -192,6 +192,13 @@ Task(
 
 ---
 
+
+---
+
+## 📜 This pattern, as a file
+
+Runnable version (offline mock, no API key · `nika check` proves the DAG before any token is spent): [`patterns-as-code/04-orchestrator-workers.nika.yaml`](../patterns-as-code/04-orchestrator-workers.nika.yaml) — see [Patterns as Code](../patterns-as-code/).
+
 <div align="center">
 
 [← 03 Parallelization](03-parallelization.md) ━━━━━━━━━━━━━━━━━━━━━●━━━━━━━━━━━━━━ [05 Evaluator-Optimizer →](05-evaluator-optimizer.md)

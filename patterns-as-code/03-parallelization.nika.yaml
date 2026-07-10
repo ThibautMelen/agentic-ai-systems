@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=https://nika.sh/spec/v1/workflow.schema.json
+#
+# 🛤️ Parallelization — as code.
+# Tasks with no dependency between them run concurrently (implicit DAG
+# parallelism); the fan-in waits on depends_on. for_each adds map-style
+# fan-out with a concurrency cap.
+#
+# Prove it offline:
+#   nika check 03-parallelization.nika.yaml
+nika: v1
+workflow: parallelization
+
+model: mock/echo
+vars:
+  proposal: "move the coop to solar power"
+
+tasks:
+  # no deps between these three → they run in parallel (sectioning)
+  - id: pros
+    infer:
+      prompt: "List the 3 strongest pros of ${{ vars.proposal }}"
+  - id: cons
+    infer:
+      prompt: "List the 3 strongest cons of ${{ vars.proposal }}"
+  - id: costs
+    infer:
+      prompt: "Estimate rough costs of ${{ vars.proposal }}"
+
+  # voting variant: same question, several independent drafts
+  - id: vote
+    for_each: ${{ [1, 2, 3] }}
+    max_parallel: 3
+    with:
+      n: ${{ index }}
+    infer:
+      prompt: "Judge #${{ with.n }} · should we do it? One-line verdict on ${{ vars.proposal }}"
+
+  - id: synthesize
+    depends_on: [pros, cons, costs, vote]
+    infer:
+      prompt: >-
+        Merge into one recommendation ·
+        pros ${{ tasks.pros.output }} · cons ${{ tasks.cons.output }} ·
+        costs ${{ tasks.costs.output }} · votes ${{ tasks.vote.output }}

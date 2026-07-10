@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=https://nika.sh/spec/v1/workflow.schema.json
+#
+# ⛓️ Prompt Chaining — as code.
+# Each step consumes the previous step's output; schema: blocks ARE the
+# gates 🚧 (invalid output stops the chain before the next token is spent).
+#
+# Prove it offline (mock model · no API key):
+#   nika check 01-prompt-chaining.nika.yaml
+#   nika run   01-prompt-chaining.nika.yaml
+nika: v1
+workflow: prompt-chaining
+
+model: mock/echo
+vars:
+  topic: "why hens make excellent orchestra conductors"
+
+tasks:
+  - id: outline
+    infer:
+      prompt: "Write a 3-point outline about ${{ vars.topic }}"
+      schema:                       # 🚧 gate 1 · the outline must be structured
+        type: object
+        required: [points]
+        properties:
+          points:
+            type: array
+            minItems: 3
+            items: { type: string }
+
+  - id: draft
+    depends_on: [outline]
+    infer:
+      prompt: "Expand this outline into a short article · ${{ tasks.outline.output.points }}"
+
+  - id: polish
+    depends_on: [draft]
+    infer:
+      prompt: "Tighten the prose, keep the facts · ${{ tasks.draft.output }}"

@@ -20,6 +20,13 @@
 
 ---
 
+
+---
+
+## 🗞️ [What Changed (2025-2026)](what-changed-2026.md)
+
+> The dated map of everything that moved since Building Effective Agents: context engineering, the multi-agent debate, the AGENTS.md/SKILL.md/MCP stack, harness engineering, sandboxing, evals.
+
 <div align="center">
 
 [🏠 Home](../README.md) • **🦄 Foundations** • [⚙️ Workflows](../workflows/) • [🐔 Autonomous](../agents/) • [🛠️ Implementation](../implementation/) • [🗺️ Guides](../guides/)

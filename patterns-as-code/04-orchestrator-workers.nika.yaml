@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=https://nika.sh/spec/v1/workflow.schema.json
+#
+# 🦑 Orchestrator-Workers — as code.
+# A planner decomposes the job into subtasks it invents at runtime; a
+# for_each fan-out runs one worker per subtask; a synthesizer merges.
+# The DAG shape is fixed; the WORK LIST is dynamic — that is the
+# orchestrator pattern without giving up reviewability.
+#
+# Prove it offline:
+#   nika check 04-orchestrator-workers.nika.yaml
+nika: v1
+workflow: orchestrator-workers
+
+model: mock/echo
+vars:
+  goal: "audit the chicken-coop codebase for security issues"
+
+tasks:
+  - id: plan
+    infer:
+      prompt: "Break this goal into 3-5 independent subtasks · ${{ vars.goal }}"
+      schema:
+        type: object
+        required: [subtasks]
+        properties:
+          subtasks:
+            type: array
+            minItems: 3
+            maxItems: 5
+            items: { type: string }
+
+  - id: worker
+    depends_on: [plan]
+    for_each: ${{ tasks.plan.output.subtasks }}
+    max_parallel: 3
+    fail_fast: false
+    on_error:
+      recover: null            # one failed worker never kills the batch
+    with:
+      subtask: ${{ item }}
+    infer:
+      prompt: "You are a specialist. Do exactly this subtask and report · ${{ with.subtask }}"
+
+  - id: synthesize
+    depends_on: [worker]
+    infer:
+      prompt: "Merge the worker reports into one findings list · ${{ tasks.worker.output }}"

@@ -228,6 +228,13 @@ flowchart TB
 
 ---
 
+
+---
+
+## 📜 This pattern, as a file
+
+Runnable version (offline mock, no API key · `nika check` proves the DAG before any token is spent): [`patterns-as-code/03-parallelization.nika.yaml`](../patterns-as-code/03-parallelization.nika.yaml) — see [Patterns as Code](../patterns-as-code/).
+
 <div align="center">
 
 [← 02 Routing](02-routing.md) ━━━━━━━━━━━━━━━━●━━━━━━━━━━━━━━━━━━━ [04 Orchestrator-Workers →](04-orchestrator-workers.md)

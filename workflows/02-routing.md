@@ -86,6 +86,13 @@ Routing works well for complex tasks where there are **distinct categories** tha
 
 ---
 
+
+---
+
+## 📜 This pattern, as a file
+
+Runnable version (offline mock, no API key · `nika check` proves the DAG before any token is spent): [`patterns-as-code/02-routing.nika.yaml`](../patterns-as-code/02-routing.nika.yaml) — see [Patterns as Code](../patterns-as-code/).
+
 <div align="center">
 
 [← 01 Prompt Chaining](01-prompt-chaining.md) ━━━━━━━━━━━●━━━━━━━━━━━━━━━━━━━━━━━━ [03 Parallelization →](03-parallelization.md)

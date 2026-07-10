@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=https://nika.sh/spec/v1/workflow.schema.json
+#
+# 🚦 Routing — as code.
+# One classifier step, then `when:` gates (CEL) dispatch to the matching
+# specialist. Non-matching branches are skipped, not failed.
+#
+# Prove it offline:
+#   nika check 02-routing.nika.yaml
+nika: v1
+workflow: routing
+
+model: mock/echo
+vars:
+  ticket: "My invoice from March was charged twice."
+
+tasks:
+  - id: classify
+    infer:
+      prompt: "Classify this support ticket · ${{ vars.ticket }}"
+      schema:
+        type: object
+        required: [category]
+        properties:
+          category: { type: string, enum: [billing, technical, general] }
+
+  - id: billing
+    depends_on: [classify]
+    when: ${{ tasks.classify.output.category == 'billing' }}
+    infer:
+      prompt: "Draft a billing-team reply · ${{ vars.ticket }}"
+
+  - id: technical
+    depends_on: [classify]
+    when: ${{ tasks.classify.output.category == 'technical' }}
+    infer:
+      prompt: "Draft a technical-support reply · ${{ vars.ticket }}"
+
+  - id: general
+    depends_on: [classify]
+    when: ${{ tasks.classify.output.category == 'general' }}
+    infer:
+      prompt: "Draft a friendly general reply · ${{ vars.ticket }}"

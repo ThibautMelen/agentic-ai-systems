@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=https://nika.sh/spec/v1/workflow.schema.json
+#
+# 🩻 Evaluator-Optimizer — as code.
+# Generate → evaluate against explicit criteria → improve only when the
+# evaluator says so (`when:` gate on the score). One explicit refinement
+# pass keeps cost bounded and the loop reviewable; open-ended loops are
+# the agent: verb's territory.
+#
+# Prove it offline:
+#   nika check 05-evaluator-optimizer.nika.yaml
+nika: v1
+workflow: evaluator-optimizer
+
+model: mock/echo
+vars:
+  brief: "a launch tweet for a solar-powered chicken coop"
+
+tasks:
+  - id: draft
+    infer:
+      prompt: "Write ${{ vars.brief }}"
+
+  - id: evaluate
+    depends_on: [draft]
+    infer:
+      prompt: "Score this draft 0-10 and critique it · ${{ tasks.draft.output }}"
+      schema:
+        type: object
+        required: [score, critique]
+        properties:
+          score: { type: integer, minimum: 0, maximum: 10 }
+          critique: { type: string }
+
+  - id: improve
+    depends_on: [draft, evaluate]
+    when: ${{ tasks.evaluate.output.score < 8 }}
+    infer:
+      prompt: >-
+        Rewrite using this critique · ${{ tasks.evaluate.output.critique }} ·
+        original · ${{ tasks.draft.output }}
