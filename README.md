@@ -6,6 +6,7 @@
 
 *Main Agent spawns Subagents like a hen with her chicks 🐔🪺🐦*
 
+[![patterns proven](https://github.com/ThibautMelen/agentic-ai-systems/actions/workflows/check.yml/badge.svg)](https://github.com/ThibautMelen/agentic-ai-systems/actions/workflows/check.yml)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-CLI-8b5cf6?style=flat-square&logo=anthropic&logoColor=white)](https://docs.anthropic.com/en/docs/claude-code)
 [![Anthropic Research](https://img.shields.io/badge/Anthropic-Research-ec4899?style=flat-square&logo=anthropic&logoColor=white)](https://www.anthropic.com/research/building-effective-agents)
 [![SuperNovae](https://img.shields.io/badge/SuperNovae-Studio-ff6b35?style=flat-square&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0xMiAyTDkgOUwyIDEyTDkgMTVMMTIgMjJMMTUgMTVMMjIgMTJMMTUgOVoiLz48L3N2Zz4=)](https://github.com/SuperNovae-studio)
@@ -50,6 +51,9 @@ mindmap
 ```
 
 ---
+
+> [!TIP]
+> **New in the 2026 edition** — [🗞️ What Changed 2025-2026](foundations/what-changed-2026.md) (the dated map: context engineering, the multi-agent debate, the AGENTS.md · SKILL.md · MCP stack, harness engineering) and [📜 Patterns as Code](patterns-as-code/) (every pattern as a runnable file — checked in CI on every push, no API key needed).
 
 ## 🗺️ Navigation
 

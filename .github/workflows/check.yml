@@ -1,0 +1,55 @@
+# Proves the repo on every push: the five pattern files must pass
+# `nika check`, and every relative link must resolve. The pedagogy
+# stays runnable or the build goes red.
+name: patterns proven
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions: {}
+
+jobs:
+  nika-check:
+    name: nika check · ${{ matrix.pattern }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        pattern:
+          - 01-prompt-chaining
+          - 02-routing
+          - 03-parallelization
+          - 04-orchestrator-workers
+          - 05-evaluator-optimizer
+    steps:
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4
+      - name: plan with receipts (check lane · zero secrets)
+        uses: supernovae-st/nika-action@v1
+        with:
+          workflow: patterns-as-code/${{ matrix.pattern }}.nika.yaml
+          mode: check
+          comment: 'false'
+
+  links:
+    name: internal links resolve
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4
+      - name: check every relative link
+        run: |
+          python3 - <<'PY'
+          import re, os, glob, sys
+          bad = 0
+          for md in glob.glob('**/*.md', recursive=True):
+              base = os.path.dirname(md)
+              for m in re.finditer(r'\]\(([^)#\s]+?)(?:#[^)\s]*)?\)', open(md, encoding='utf-8').read()):
+                  href = m.group(1)
+                  if href.startswith(('http', 'mailto:')) or not href:
+                      continue
+                  if not os.path.exists(os.path.normpath(os.path.join(base, href))):
+                      print(f"BROKEN {md} -> {href}")
+                      bad += 1
+          sys.exit(1 if bad else 0)
+          PY

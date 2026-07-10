@@ -50,6 +50,9 @@ nika run   patterns-as-code/02-routing.nika.yaml
 
 And the [🐔 Autonomous Agent](../agents/autonomous.md) is a verb, not a diagram: an `agent:` task carries its **own budget** (`max_turns`, `max_tokens_total`) and a **default-deny tool whitelist** — autonomy inside a fence (see [`23-code-review`](https://github.com/supernovae-st/nika/blob/main/examples/23-code-review.nika.yaml) in the engine's examples).
 
+> [!NOTE]
+> These five files are **checked in CI on every push** by [`nika-action`](https://github.com/supernovae-st/nika-action) (check lane — static, zero secrets). If a pattern file stops being valid, the build goes red. Pedagogy with receipts.
+
 ## A checker that earns its keep
 
 While writing these five files for this repo, `nika check` caught a real bug before any run: the evaluator-optimizer's `improve` step referenced `tasks.draft` without declaring `draft` in `depends_on` — an invisible race in most orchestration scripts, a named finding here (`NIKA-DAG-003`, with a docs URL). That is the point of patterns-as-code: **the pattern's correctness becomes machine-checkable.**
