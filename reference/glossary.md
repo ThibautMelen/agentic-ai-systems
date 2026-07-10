@@ -20,6 +20,10 @@
 : The design layer between AI agents and computer tools. Coined by Anthropic, emphasizing that tool interfaces should be optimized for agent ergonomics (clear documentation, error handling, output structure) not just human usability (HCI).
 : *Also known as:* Tool Interface, Agent Tooling Layer
 
+**AGENTS.md**
+: Repo-level instruction file read natively by most 2026 harnesses (Codex, Copilot, Cursor, Gemini CLI, goose, Zed, Warp, opencode…) — the "instructions" layer of the de-facto config stack. Claude Code reads CLAUDE.md instead. See [What Changed 2026](../foundations/what-changed-2026.md).
+: *Spec:* [agents.md](https://agents.md/)
+
 **Agent**
 : ⚠️ **Ambiguous term** — can mean:
 : 1. **Generic:** Any autonomous AI system (Main Agent, Subagent)
@@ -66,7 +70,7 @@ AskUserQuestion(questions=[{
 : Anthropic's term for the **Augmented LLM** — the foundational unit of all agentic systems. An LLM enhanced with retrieval, tools, and memory.
 : ⚠️ **Not to be confused with:** Claude Code Components (Subagent, Slash Command, Skill, Hook) which are abstractions built ON TOP of the building block.
 : *See also:* Augmented LLM
-: *See also:* [Building Block Pattern](../concepts/workflows/00-building-block.md)
+: *See also:* [Building Block Pattern](../foundations/augmented-llm.md)
 
 **Built-in Subagents**
 : Pre-configured subagents available out of the box in Claude Code.
@@ -93,6 +97,10 @@ AskUserQuestion(questions=[{
 
 ## D
 
+**Context Engineering**
+: The 2026 umbrella discipline that absorbed prompt engineering: treat the context window as a budget — compaction, just-in-time retrieval, memory files, sub-agents as context isolation. Coined canonical by Anthropic (Sept 2025).
+: *See:* [What Changed 2026](../foundations/what-changed-2026.md)
+
 **Delegation Layer**
 : Layer 3 in the architecture. Contains Slash Commands and Skills that define workflows and capabilities.
 : *See:* [Delegation Layer](../implementation/architecture/03-delegation-layer.md)
@@ -106,7 +114,7 @@ AskUserQuestion(questions=[{
 
 **🩻 Evaluator-Optimizer**
 : Anthropic pattern for iterative improvement through generate-evaluate-feedback loops.
-: *See:* [Evaluator-Optimizer Pattern](../concepts/workflows/06-evaluator-optimizer.md)
+: *See:* [Evaluator-Optimizer Pattern](../workflows/05-evaluator-optimizer.md)
 
 **Execution Layer**
 : Layer 4 in the architecture. Where Subagents and Tools perform actual work.
@@ -115,6 +123,10 @@ AskUserQuestion(questions=[{
 ---
 
 ## H
+
+**Harness**
+: The loop *around* the model: tool plumbing, permissioning, budgets, retries, verification. "Harness engineering" became the 2026 job title for making long-running agents reliable.
+: *See:* [What Changed 2026](../foundations/what-changed-2026.md)
 
 **Hook**
 : Shell command or prompt triggered by Claude Code events. Types: `command` (shell) or `prompt` (LLM-based).
@@ -157,14 +169,18 @@ AskUserQuestion(questions=[{
 
 **🧬 Master-Clone**
 : Claude Code pattern for spawning multiple isolated subagents handling independent domains. Variant of 🛤️ Parallelization.
-: *See:* [Master-Clone in Parallelization](../concepts/workflows/04-parallelization.md#variant--master-clone)
+: *See:* [Master-Clone in Parallelization](../workflows/03-parallelization.md#variant--master-clone)
+
+**MCP (Model Context Protocol)**
+: The de-facto protocol for giving agents tools/resources. Registry live since Sept 2025; `.mcpb` bundles; the 2026-07-28 spec makes the core stateless and deprecates sampling/roots/logging. Governed by the Agentic AI Foundation (Linux Foundation) since Dec 2025.
+: *See:* [What Changed 2026](../foundations/what-changed-2026.md)
 
 **Model-invoked**
 : Capability (like Skills) that Claude autonomously decides when to use based on context. Contrast with User-invoked (Slash Commands).
 
 **🖥️ Multi-Window Context**
 : Claude Code pattern for checkpointing and resuming long workflows. Implementation of 🐔 Autonomous Agent.
-: *See:* [Multi-Window Context](../concepts/agents/multi-window-context.md)
+: *See:* [Multi-Window Context](../agents/multi-window.md)
 
 ---
 
@@ -231,7 +247,7 @@ AskUserQuestion(questions=[{
 
 **🚦 Routing**
 : Anthropic pattern for directing inputs to specialized handlers based on classification.
-: *See:* [Routing Pattern](../concepts/workflows/03-routing.md)
+: *See:* [Routing Pattern](../workflows/02-routing.md)
 
 **Resumable Subagents**
 : Subagents that can be resumed via `resume` parameter to continue previous conversations using their `agentId`. Agent transcripts are stored in project directory as `agent-{agentId}.jsonl`.
@@ -248,6 +264,9 @@ Task(
 ---
 
 ## S
+
+**SKILL.md (Agent Skills)**
+: Progressive-disclosure procedure folders for agents — open spec since Dec 2025 ([agentskills.io](https://agentskills.io/specification)), adopted by 30+ platforms. The "procedures" layer of the config stack; this repo's [Skill](../implementation/components/skill.md) page covers the Claude Code implementation.
 
 **Sectioning**
 : Sub-variant of 🛤️ Parallelization where tasks are split into independent subtasks processed concurrently. Focus on task decomposition.
@@ -349,7 +368,7 @@ Task(
 
 **🧙 Wizard Workflows**
 : Claude Code pattern for multi-step processes with explicit user confirmation at each phase. Implementation of Human-in-the-Loop.
-: *See:* [Wizard Workflow in Prompt Chaining](../concepts/workflows/02-prompt-chaining.md#variant--wizard-workflows)
+: *See:* [Wizard Workflow in Prompt Chaining](../workflows/01-prompt-chaining.md#variant--wizard-workflows)
 
 **Worker**
 : Specialized executor in Orchestrator-Workers pattern. In Claude Code, these are Subagents.

@@ -67,6 +67,6 @@
 
 **━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━**
 
-[🏠 Home](../README.md) • [📚 Concepts](../concepts/)
+[🏠 Home](../README.md) • [📚 Concepts](../workflows/)
 
 </div>
