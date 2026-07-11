@@ -40,6 +40,15 @@ nika check patterns-as-code/02-routing.nika.yaml
 nika run   patterns-as-code/02-routing.nika.yaml
 ```
 
+![A broken pattern file: nika check catches the DAG bug with a named finding, the three-line fix, then a clean verdict — before any token is spent](https://raw.githubusercontent.com/supernovae-st/nika/main/media/gifs/static-check-fix.optimized.gif)
+
+*The check loop above is real terminal output from the released binary — the same gate CI runs on this folder.*
+
+**And the file IS the DAG** — open any of these in VS Code ([extension](https://marketplace.visualstudio.com/items?itemName=supernovae.nika-lang)) and the YAML renders as a live graph:
+
+![The same .nika.yaml file rendered as an interactive DAG canvas in VS Code — yaml to dag, one keystroke](https://raw.githubusercontent.com/supernovae-st/nika-vscode/main/media/dag-execution.gif)
+
+
 | Pattern | File | The pattern's essence, in file form |
 |---------|------|-------------------------------------|
 | [⛓️ Prompt Chaining](../workflows/01-prompt-chaining.md) | [`01-prompt-chaining.nika.yaml`](01-prompt-chaining.nika.yaml) | steps chained by `depends_on:` — `schema:` blocks ARE the 🚧 gates |
