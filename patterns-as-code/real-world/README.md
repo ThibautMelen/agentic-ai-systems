@@ -15,6 +15,10 @@
 - **Type-guarded state** — a corrupted state file folds to `[]` instead of crashing the diff (`try fromjson catch []`, then an array-type check).
 - **Receipts** — every run writes a hash-chained trace; `nika trace verify` exits 0 or names the first broken link.
 
+**The resilience patterns, visible** — a task fails, `on_error` recovers it, the batch survives:
+
+![A task fails mid-run; on_error recover kicks in and the workflow completes with the failure named in the verdict](https://raw.githubusercontent.com/supernovae-st/nika/main/media/gifs/on-error-recover.optimized.gif)
+
 ## Run them
 
 ```bash
