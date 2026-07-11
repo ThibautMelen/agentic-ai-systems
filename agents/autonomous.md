@@ -135,6 +135,13 @@ Agent:
 
 ## Risk Management
 
+**What a fence looks like in practice** — a declared permits boundary audited before the run (default-deny: everything not listed is refused):
+
+![nika check audits the permits boundary: filesystem, network and exec surfaces declared, everything else default-deny — before any token is spent](https://raw.githubusercontent.com/supernovae-st/nika/main/media/gifs/permits-audit.optimized.gif)
+
+*One executable take on this section's advice: the [`agent:` verb](https://github.com/supernovae-st/nika/blob/main/examples/23-code-review.nika.yaml) carries its own budget and a default-deny tool whitelist — autonomy inside a fence.*
+
+
 > **Warning:** The autonomous nature of agents means higher costs, and the potential for compounding errors. We recommend extensive testing in sandboxed environments, along with appropriate guardrails.
 
 ---
