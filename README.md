@@ -55,6 +55,11 @@ mindmap
 > [!TIP]
 > **New in the 2026 edition** — [🗞️ What Changed 2025-2026](foundations/what-changed-2026.md) (the dated map: context engineering, the multi-agent debate, the AGENTS.md · SKILL.md · MCP stack, harness engineering) and [📜 Patterns as Code](patterns-as-code/) (every pattern as a runnable file — checked in CI on every push, no API key needed).
 
+<p align="center">
+  <a href="patterns-as-code/"><img src="https://raw.githubusercontent.com/supernovae-st/nika/main/media/gifs/chat-to-workflow.optimized.gif" alt="A repeated chat prompt becomes a workflow file; checked before a token is spent, then a real local run — the patterns in this repo, as runnable files" width="850"></a>
+</p>
+<p align="center"><sub>⬆️ real capture: a repeated prompt graduates into a checked, runnable file — <a href="patterns-as-code/">every pattern in this repo works this way</a> · and <a href="patterns-as-code/real-world/">three of them run a real campaign daily</a> 🛰️</sub></p>
+
 ## 🗺️ Navigation
 
 <table>
