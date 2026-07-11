@@ -1,0 +1,101 @@
+# yaml-language-server: $schema=https://nika.sh/spec/v1/workflow.schema.json
+#
+# real-world · did anything we depend on ship? release feeds of the
+# real nika workspace deps → diff vs last run → only the new ships.
+#
+# These are the ACTUAL files running the nika distribution campaign
+# (2026-07) — copied verbatim, not a demo. Engine: github.com/supernovae-st/nika
+nika: v1
+workflow: deps-radar
+description: "release feeds of our real Rust deps → diff vs last run → only the NEW ships"
+
+vars:
+  feeds:
+    - "https://github.com/tokio-rs/tokio/releases.atom"
+    - "https://github.com/seanmonstar/reqwest/releases.atom"
+    - "https://github.com/01mf02/jaq/releases.atom"
+    - "https://github.com/clap-rs/clap/releases.atom"
+    - "https://github.com/serde-rs/serde/releases.atom"
+  state_path: "./state/deps-seen.json"
+  out_path: "./deps-latest.md"
+
+tasks:
+  - id: previous
+    invoke:
+      tool: "nika:read"
+      args: { path: "${{ vars.state_path }}" }
+    on_error:
+      on_codes: [NIKA-BUILTIN-READ-001]
+      recover: []
+
+  - id: pull
+    for_each: ${{ vars.feeds }}
+    max_parallel: 2
+    fail_fast: false
+    on_error:
+      recover: { items: [] }
+    invoke:
+      tool: "nika:fetch"
+      args:
+        url: "${{ item }}"
+        mode: feed
+
+  - id: releases
+    depends_on: [pull]
+    invoke:
+      tool: "nika:jq"
+      args:
+        input: ${{ tasks.pull.output }}
+        expression: |
+          [ .[] | .items[]? | { title, url: .link, published } ]
+          | unique_by(.url) | sort_by(.published) | reverse | .[0:40]
+
+  - id: fresh
+    depends_on: [previous, releases]
+    invoke:
+      tool: "nika:jq"
+      args:
+        input:
+          prev: ${{ tasks.previous.output }}
+          cur: ${{ tasks.releases.output }}
+        expression: |
+          (.prev | if type == "string" then (try fromjson catch []) else . end
+                 | if type == "array" then . else [] end) as $seen
+          | .cur - $seen
+
+  - id: shortlist
+    depends_on: [fresh]
+    invoke:
+      tool: "nika:jq"
+      args:
+        input: ${{ tasks.fresh.output }}
+        expression: |
+          if length == 0
+          then "nothing new since last run"
+          else map("- [" + .title + "](" + (.url // "?") + ")") | join("\n")
+          end
+
+  - id: report
+    depends_on: [shortlist]
+    invoke:
+      tool: "nika:write"
+      args:
+        path: "${{ vars.out_path }}"
+        content: "${{ tasks.shortlist.output }}"
+        overwrite: true
+
+  - id: save_state
+    depends_on: [releases]
+    invoke:
+      tool: "nika:write"
+      args:
+        path: "${{ vars.state_path }}"
+        content: "${{ tasks.releases.output }}"
+        create_dirs: true
+        overwrite: true
+
+outputs:
+  new_releases:
+    value: ${{ tasks.fresh.output }}
+    type: array
+    description: "dependency releases unseen until now"
