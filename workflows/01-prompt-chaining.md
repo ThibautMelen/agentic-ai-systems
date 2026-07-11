@@ -36,6 +36,12 @@ flowchart LR
 
 ---
 
+**From chat to chain, for real** — the moment a repeated prompt becomes a chained file (then a real local run writes typed output):
+
+![A repeated chat prompt becomes meeting-actions.nika.yaml: check audits the chain, then a real local run (ollama) writes typed action items](https://raw.githubusercontent.com/supernovae-st/nika/main/media/gifs/chat-to-workflow.optimized.gif)
+
+*Runnable version of this pattern: [`01-prompt-chaining.nika.yaml`](../patterns-as-code/01-prompt-chaining.nika.yaml).*
+
 ## 🚧 Gate
 
 > A checkpoint between steps that validates the output before proceeding. If validation fails, the chain exits early.
