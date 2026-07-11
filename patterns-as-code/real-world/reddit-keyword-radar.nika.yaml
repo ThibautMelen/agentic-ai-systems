@@ -1,0 +1,106 @@
+# yaml-language-server: $schema=https://nika.sh/spec/v1/workflow.schema.json
+#
+# real-world · the reddit radar that runs the nika distribution warm-up:
+# target-sub new-thread feeds → keyword filter → diff vs last run →
+# only the NEW threads since yesterday. Deterministic · zero model · $0.
+#
+# These are the ACTUAL files running the nika distribution campaign
+# (2026-07) — copied verbatim, not a demo. Engine: github.com/supernovae-st/nika
+nika: v1
+workflow: warmup-radar
+description: "target-sub new threads → keyword filter → only the NEW ones since last run"
+
+vars:
+  feeds:
+    - "https://old.reddit.com/r/rust/new/.rss"
+    - "https://old.reddit.com/r/LocalLLaMA/new/.rss"
+    - "https://old.reddit.com/r/LocalLLaMA/search.rss?q=mcp&restrict_sr=on&sort=new"
+  keywords: "mcp|structured|json|schema|agent|workflow|cli|terminal|yaml|ollama|hallucin|tool call|orchestrat"
+  state_path: "./state/radar-seen.json"
+  out_path: "./radar-latest.md"
+
+tasks:
+  # First run has no state file · recover to the empty list (not-found ONLY).
+  - id: previous
+    invoke:
+      tool: "nika:read"
+      args: { path: "${{ vars.state_path }}" }
+    on_error:
+      on_codes: [NIKA-BUILTIN-READ-001]
+      recover: []
+
+  - id: pull
+    for_each: ${{ vars.feeds }}
+    max_parallel: 1              # polite · sequential
+    fail_fast: false
+    on_error:
+      recover: { items: [] }     # a 403/429'd feed yields empty · the run lives
+    invoke:
+      tool: "nika:fetch"
+      args:
+        url: "${{ item }}"
+        mode: feed
+        headers:
+          user-agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Safari/605.1.15"
+
+  - id: matches
+    depends_on: [pull]
+    invoke:
+      tool: "nika:jq"
+      args:
+        input: ${{ tasks.pull.output }}
+        expression: |
+          [ .[] | .items[]? | { title, url: .link, published } ]
+          | map(select(.title != null and (.title | test("${{ vars.keywords }}"; "i"))))
+          | unique_by(.url)
+          | sort_by(.published) | reverse
+
+  - id: fresh
+    depends_on: [previous, matches]
+    invoke:
+      tool: "nika:jq"
+      args:
+        input:
+          prev: ${{ tasks.previous.output }}
+          cur: ${{ tasks.matches.output }}
+        expression: |
+          (.prev | if type == "string" then (try fromjson catch []) else . end
+                 | if type == "array" then . else [] end) as $seen
+          | .cur - $seen
+
+  - id: shortlist
+    depends_on: [fresh]
+    invoke:
+      tool: "nika:jq"
+      args:
+        input: ${{ tasks.fresh.output }}
+        expression: |
+          if length == 0
+          then "nothing new since last run — go engage with yesterday's threads"
+          else map("- [" + .title + "](" + (.url // "?") + ")") | join("\n")
+          end
+
+  - id: report
+    depends_on: [shortlist]
+    invoke:
+      tool: "nika:write"
+      args:
+        path: "${{ vars.out_path }}"
+        content: "${{ tasks.shortlist.output }}"
+        overwrite: true
+
+  - id: save_state
+    depends_on: [matches]
+    invoke:
+      tool: "nika:write"
+      args:
+        path: "${{ vars.state_path }}"
+        content: "${{ tasks.matches.output }}"
+        create_dirs: true
+        overwrite: true
+
+outputs:
+  new_threads:
+    value: ${{ tasks.fresh.output }}
+    type: array
+    description: "threads matching the expertise keywords, unseen until now"

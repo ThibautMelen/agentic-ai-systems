@@ -23,6 +23,9 @@ jobs:
           - 03-parallelization
           - 04-orchestrator-workers
           - 05-evaluator-optimizer
+          - real-world/reddit-keyword-radar
+          - real-world/github-traffic-ledger
+          - real-world/deps-release-radar
     steps:
       - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4
       - name: plan with receipts (check lane · zero secrets)

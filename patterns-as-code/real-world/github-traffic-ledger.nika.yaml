@@ -1,0 +1,131 @@
+# yaml-language-server: $schema=https://nika.sh/spec/v1/workflow.schema.json
+#
+# real-world · the ledger that measures the nika distribution campaign:
+# gh traffic + release download_counts (split human/CI) across 4 repos →
+# one NDJSON line per run. The before/after of every launch peak.
+#
+# These are the ACTUAL files running the nika distribution campaign
+# (2026-07) — copied verbatim, not a demo. Engine: github.com/supernovae-st/nika
+nika: v1
+workflow: traffic-baseline
+description: "multi-repo gh traffic + release downloads → one NDJSON line per run"
+
+vars:
+  repos:
+    - "supernovae-st/nika"
+    - "supernovae-st/nika-agents"
+    - "supernovae-st/nika-vscode"
+    - "supernovae-st/nika-spec"
+  log_path: "./traffic-log.ndjson"
+
+tasks:
+  - id: today
+    exec:
+      command: "date -u +%Y-%m-%d"
+      capture: structured
+
+  - id: views
+    for_each: ${{ vars.repos }}
+    max_parallel: 2
+    fail_fast: false
+    on_error:
+      recover: { stdout: "{}" }
+    exec:
+      command: "gh api repos/${{ item }}/traffic/views"
+      capture: structured
+
+  - id: clones
+    for_each: ${{ vars.repos }}
+    max_parallel: 2
+    fail_fast: false
+    on_error:
+      recover: { stdout: "{}" }
+    exec:
+      command: "gh api repos/${{ item }}/traffic/clones"
+      capture: structured
+
+  - id: meta
+    for_each: ${{ vars.repos }}
+    max_parallel: 2
+    fail_fast: false
+    on_error:
+      recover: { stdout: "{}" }
+    exec:
+      command: "gh api repos/${{ item }}"
+      capture: structured
+
+  - id: referrers
+    exec:
+      command: "gh api repos/supernovae-st/nika/traffic/popular/referrers"
+      capture: structured
+
+  - id: rel
+    exec:
+      command: "gh api repos/supernovae-st/nika/releases -X GET -F per_page=5"
+      capture: structured
+
+  # First run has no log yet · recover to empty string (not-found ONLY).
+  - id: previous
+    invoke:
+      tool: "nika:read"
+      args: { path: "${{ vars.log_path }}" }
+    on_error:
+      on_codes: [NIKA-BUILTIN-READ-001]
+      recover: ""
+
+  - id: line
+    depends_on: [today, views, clones, meta, referrers, rel]
+    invoke:
+      tool: "nika:jq"
+      args:
+        input:
+          date: ${{ tasks.today.output.stdout }}
+          repos: ${{ vars.repos }}
+          v: ${{ tasks.views.output }}
+          c: ${{ tasks.clones.output }}
+          m: ${{ tasks.meta.output }}
+          refs: ${{ tasks.referrers.output.stdout }}
+          rel: ${{ tasks.rel.output.stdout }}
+        expression: |
+          def parse: if . == null then {} else (.stdout // "{}" | try fromjson catch {}) end;
+          (.rel | try fromjson catch []) as $rels
+          | ($rels | map(.assets // [] | map(.download_count // 0) | add // 0) | add // 0) as $dl_total
+          | ($rels | map(.assets // [] | map(select(.name | test("macos")) | .download_count // 0) | add // 0) | add // 0) as $dl_human
+          | {
+              date: (.date | gsub("\\s";"")),
+              repos: ([.repos, (.v | map(parse)), (.c | map(parse)), (.m | map(parse))] | transpose
+                | map({ (.[0] | sub("supernovae-st/";"")): {
+                    v: (.[1].count // 0), vu: (.[1].uniques // 0),
+                    c: (.[2].count // 0), cu: (.[2].uniques // 0),
+                    stars: (.[3].stargazers_count // 0)
+                  }}) | add),
+              dl_last5: { total: $dl_total, macos_human: $dl_human },
+              referrers: (.refs | try fromjson catch [] | map({(.referrer): .uniques}) | add // {})
+            } | tojson
+
+  - id: append
+    depends_on: [previous, line]
+    invoke:
+      tool: "nika:jq"
+      args:
+        input:
+          prev: ${{ tasks.previous.output }}
+          new: ${{ tasks.line.output }}
+        expression: |
+          if (.prev == "") then .new + "\n" else (.prev | rtrimstr("\n")) + "\n" + .new + "\n" end
+
+  - id: save
+    depends_on: [append]
+    invoke:
+      tool: "nika:write"
+      args:
+        path: "${{ vars.log_path }}"
+        content: "${{ tasks.append.output }}"
+        overwrite: true
+        create_dirs: true
+
+outputs:
+  snapshot:
+    value: ${{ tasks.line.output }}
+    type: string
+    description: "today's full-funnel line (views · clones · stars ×4 repos · downloads human/total)"
