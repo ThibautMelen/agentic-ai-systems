@@ -35,6 +35,12 @@ flowchart LR
 
 ---
 
+**What it looks like for real** — parallel waves executing in the terminal (tasks with no mutual deps run concurrently, the lanes are the fan-out):
+
+![nika run executes independent tasks in parallel waves — live lanes, per-task timings, then the verdict](https://raw.githubusercontent.com/supernovae-st/nika/main/media/gifs/dag-execution.optimized.gif)
+
+*From the runnable version of this exact pattern: [`03-parallelization.nika.yaml`](../patterns-as-code/03-parallelization.nika.yaml) — offline, no API key.*
+
 ## Key Insight
 
 ```
